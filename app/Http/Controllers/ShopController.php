@@ -9,111 +9,86 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-           public function index(Request $request){
 
-            $size = $request->query('size') ? $request->query('size') : 12;
-            $o_column = "";
-            $o_order = "";
-            $order = $request->query('order') ? $request->query('order') : -1;
-            $f_brands =$request->query('brands');
-            Switch($order)
-            {
-                case 1:
-                    $o_column = 'created_at';
-                    $o_order = 'DESC';
-                    break;
+    public function index(Request $request)
+    {
+        // Default values
+        $size = $request->query('size') ? $request->query('size') : 12;
+        $o_column = '';
+        $o_order = '';
+        $order = $request->query('order') ? $request->query('order') : -1;
+        $f_brands = $request->query('brands');
+        $f_categories = $request->query('categories');
+        $min_price = $request->query('min') ? $request->query('min') : 1;
+        $max_price = $request->query('max') ? $request->query('max') : 50000;
 
-                    case 2:
-                        $o_column = 'created_at';
-                        $o_order = 'ASC';
-                        break;
+        // Set the sorting order based on the 'order' parameter
+        switch ($order) {
+            case 1:
+                $o_column = 'created_at';
+                $o_order = 'DESC';
+                break;
+            case 2:
+                $o_column = 'created_at';
+                $o_order = 'ASC';
+                break;
+            case 3:
+                $o_column = 'sale_price';
+                $o_order = 'ASC';
+                break;
+            case 4:
+                $o_column = 'sale_price';
+                $o_order = 'DESC';
+                break;
+            default:
+                $o_column = 'id';
+                $o_order = 'DESC';
+        }
 
-                    case 3:
-                        $o_column = 'sale_price';
-                        $o_order = 'ASC';
-                        break;
+        // Fetch all brands and categories for the filters dropdown
+        $brands = Brand::orderBy('name', 'ASC')->get();
+        $categories = Category::orderBy('name', 'ASC')->get();
 
-                    case 4:
-                        $o_column = 'sale_price';
-                        $o_order = 'DESC';
-                        break;
-                        default:
-                        $o_column = 'id';
-                        $o_order = 'DESC';
-                    }
-            $brands = Brand::orderBy('name','ASC')->get();
-            // $categories = Category::orderBy('name','ASC')->get();
-            $products = Product::where(function($query) use($f_brands){
-                $query->whereIn('brand_id',explode(',',$f_brands))->orWhereRaw("'".$f_brands."'='");
-            })->orderBy($o_column,$o_order)->paginate($size);
-            return view('shop', compact('products','size','order','brands','f_brands'));
-           }
+        // Initialize the query for products
+        $productsQuery = Product::query();
+
+        // Apply brand filter if brands are provided
+        if ($f_brands) {
+            $brandIds = explode(',', $f_brands);
+            if (!empty($brandIds)) {
+                $productsQuery->whereIn('brand_id', $brandIds);
+            }
+        }
+
+        // Apply category filter if categories are provided
+        if ($f_categories) {
+            $categoryIds = explode(',', $f_categories);
+            if (!empty($categoryIds)) {
+                $productsQuery->whereIn('category_id', $categoryIds);
+            }
+        }
+
+        // Apply price filter (sale_price OR regular_price)
+        $productsQuery->where(function ($query) use ($min_price, $max_price) {
+            $query->whereBetween('sale_price', [$min_price, $max_price])
+                ->orWhereBetween('regular_price', [$min_price, $max_price]);
+        });
+
+        $products = $productsQuery->orderBy($o_column, $o_order)->paginate($size);
+
+        return view('shop', compact('products', 'size', 'order', 'brands', 'f_brands', 'categories', 'f_categories', 'min_price', 'max_price'));
+    }
 
 
 
-          public function product_details($product_slug){
 
 
-            $product = Product::where('slug',$product_slug)->first();
-            $rproducts = Product::where('slug','<>',$product_slug)->get()->take(8);
-            return view('details',compact('product','rproducts'));
-
-          }
+    public function product_details($product_slug)
+    {
 
 
-
+        $product = Product::where('slug', $product_slug)->first();
+        $rproducts = Product::where('slug', '<>', $product_slug)->get()->take(8);
+        return view('details', compact('product', 'rproducts'));
+    }
 }
-
-// public function index(Request $request)
-// {
-//     $size = $request->query('size', 12); // Default to 12 if 'size' is not set
-//     $order = $request->query('order', -1); // Default to -1 if 'order' is not set
-//     $f_brands = $request->query('brands', ''); // Get 'brands' query param, default to empty string
-
-//     // Set default ordering logic
-//     $o_column = 'id';
-//     $o_order = 'DESC';
-
-//     // Determine ordering column and direction based on 'order' value
-//     switch ($order) {
-//         case 1:
-//             $o_column = 'created_at';
-//             $o_order = 'DESC';
-//             break;
-//         case 2:
-//             $o_column = 'created_at';
-//             $o_order = 'ASC';
-//             break;
-//         case 3:
-//             $o_column = 'sale_price';
-//             $o_order = 'ASC';
-//             break;
-//         case 4:
-//             $o_column = 'sale_price';
-//             $o_order = 'DESC';
-//             break;
-//     }
-
-//     // Get all brands for filtering
-//     $brands = Brand::orderBy('name', 'ASC')->get();
-
-//     // Initialize the query to fetch products
-//     $productsQuery = Product::query();
-
-//     // Only apply the filter if $f_brands is not empty
-//     if (!empty($f_brands)) {
-//         $brandsArray = explode(',', $f_brands); // Convert the comma-separated string to an array
-//         if (count($brandsArray) > 0) {
-//             $productsQuery->whereIn('brand_id', $brandsArray); // Filter products by brand ID
-//         }
-//     }
-
-//     // Apply ordering
-//     $productsQuery->orderBy($o_column, $o_order);
-
-//     // Paginate products
-//     $products = $productsQuery->paginate($size);
-
-//     // Return the view with the products and necessary data
-//     return view('shop', compact('products', 'size', 'order', 'brands', 'f_brands'));
-// }
