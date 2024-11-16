@@ -23,11 +23,21 @@ Route::put('/cart/decrease-quantity/{rowId}',[CartController::class,'decrease_ca
 Route::delete('/cart/remove/{rowId}',[CartController::class,'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear',[CartController::class,'empty_cart'])->name('cart.empty');
 
+
+//! contact route
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('home.contact.store');
+
+
 //! Coupon
 
 Route::post('/cart/apply-coupon',[CartController::class,'apply_coupon_code'])->name('cart.coupon.apply');
 Route::delete('/cart/remove-coupon',[CartController::class,'remove_coupon_code'])->name('cart.coupon.remove');
 
+
+//! Search Route
+
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
 // ! Wishlist route
 
@@ -105,4 +115,13 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('admin/slide/{id}/edit',[AdminController::class,'slide_edit'])->name('admin.slide.edit');
     Route::put('admin/slide/update',[AdminController::class,'slide_update'])->name('admin.slide.update');
     Route::delete('admin/slide/{id}/delete',[AdminController::class,'slide_delete'])->name('admin.slide.delete');
+
+      //!contacts route
+    Route::get('/admin/contact', [AdminController::class, 'contacts'])->name('admin.contacts');
+    Route::delete('/admin/contact/{id}/delete', [AdminController::class, 'contact_delete'])->name('contact.delete');
+
+
+    //! search route
+    Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
+
 });
