@@ -302,12 +302,16 @@
                                                     <img src="images/avatar/user-1.png')}}" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Kristin Watson</span>
+                                                    @foreach($admins as $admin)
+
+                                                    <span class="body-title mb-2">{{$admin->name}}</span>
+                                                    @endforeach
+
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end has-content"
+                                        {{-- <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton3">
                                             <li>
                                                 <a href="#" class="user-item">
@@ -350,7 +354,7 @@
                                                     <div class="body-title-2">Log out</div>
                                                 </a>
                                             </li>
-                                        </ul>
+                                        </ul> --}}
                                     </div>
                                 </div>
 

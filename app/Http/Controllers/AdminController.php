@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -66,11 +67,13 @@ class AdminController extends Controller
       $totalDeliveredAmount = collect($monthlyDatas)->sum('TotalDeliveredAmount');
       $totalCanceledAmount = collect($monthlyDatas)->sum('TotalCanceledAmount');
 
+      $admins = User::where('utype', 'ADM')->get();
 
     return view('admin.index', compact('orders', 'dashboardDatas','AmountM','OrderedAmountM',
-    'DeliveredAmountM','CanceledAmountM','totalAmount','totalOrderedAmount','totalDeliveredAmount','totalCanceledAmount'));
+    'DeliveredAmountM','CanceledAmountM','totalAmount','totalOrderedAmount','totalDeliveredAmount','totalCanceledAmount','admins'));
 
     }
+
 
 
 
