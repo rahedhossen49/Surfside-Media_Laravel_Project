@@ -121,7 +121,7 @@
                                     </ul>
                                 </li>
 
-                                <li class="menu-item has-children">
+                                {{-- <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-file-plus"></i></div>
                                         <div class="text">Order</div>
@@ -138,6 +138,12 @@
                                             </a>
                                         </li>
                                     </ul>
+                                </li> --}}
+                                <li class="menu-item">
+                                    <a href="{{ route('admin.orders') }}" class="">
+                                        <div class="icon"><i class="icon-file-plus"></i></div>
+                                        <div class="text">Orders</div>
+                                    </a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="{{ route('admin.slides') }}" class="">
@@ -159,14 +165,14 @@
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="users.html" class="">
+                                    <a href="{{route('admin.user')}}" class="">
                                         <div class="icon"><i class="icon-user"></i></div>
                                         <div class="text">User</div>
                                     </a>
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="settings.html" class="">
+                                    <a href="#" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>
@@ -302,10 +308,10 @@
                                                     <img src="images/avatar/user-1.png')}}" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    @foreach($admins as $admin)
+                                                    {{-- @foreach($admins as $admin)
 
                                                     <span class="body-title mb-2">{{$admin->name}}</span>
-                                                    @endforeach
+                                                    @endforeach --}}
 
                                                     <span class="text-tiny">Admin</span>
                                                 </span>

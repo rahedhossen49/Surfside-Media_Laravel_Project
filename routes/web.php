@@ -68,6 +68,15 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+    //! user route
+    Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user');
+    Route::get('/admin/{order_id}/user', [AdminController::class, 'showCustomers'])->name('admin.user');
+    Route::delete('admin/customer/{id}/delete', [AdminController::class, 'deleteCustomer'])->name('admin.user.delete');
+
+
+
+
     //! Brands Route
     Route::get('/admin/brands', [AdminController::class, 'brands'])->name('admin.brands');
     Route::get('/admin/brand/add', [AdminController::class, 'add_brand'])->name('admin.brand.add');

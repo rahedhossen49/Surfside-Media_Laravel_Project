@@ -24,6 +24,8 @@ class AdminController extends Controller
     public function index()
     {
 
+        // $admins = User::where('utype', 'ADM')->get();
+
         $orders = Order::orderBy('created_at', 'DESC')->get()->take(10);
         $dashboardDatas = DB::select("Select sum(total) As TotalAmount,
         sum(if(status='ordered',total,0)) As TotalOrderedAmount,
@@ -67,10 +69,9 @@ class AdminController extends Controller
       $totalDeliveredAmount = collect($monthlyDatas)->sum('TotalDeliveredAmount');
       $totalCanceledAmount = collect($monthlyDatas)->sum('TotalCanceledAmount');
 
-      $admins = User::where('utype', 'ADM')->get();
 
     return view('admin.index', compact('orders', 'dashboardDatas','AmountM','OrderedAmountM',
-    'DeliveredAmountM','CanceledAmountM','totalAmount','totalOrderedAmount','totalDeliveredAmount','totalCanceledAmount','admins'));
+    'DeliveredAmountM','CanceledAmountM','totalAmount','totalOrderedAmount','totalDeliveredAmount','totalCanceledAmount'));
 
     }
 
@@ -769,4 +770,30 @@ class AdminController extends Controller
         $result = Product::where('name', 'LIKE', "%$query%")->get()->take(8);
         return response()->json($result);
     }
+
+
+    public function user(){
+
+        return view('admin.user');
+    }
+
+    public function showCustomers() {
+        $users = User::with('orders')->where('utype', 'USR')->get();
+
+        return view('admin.user', compact('users'));
+    }
+
+    public function deleteCustomer($id)
+{
+    $user = User::findOrFail($id);
+
+    $user->delete();
+
+    return redirect()->route('admin.user')->with('success', 'Customer deleted successfully!');
+}
+
+
+
+
+
 }

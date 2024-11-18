@@ -20,4 +20,10 @@ class Order extends Model
     public function transaction(){
         return $this->hasOne(Transaction::class);
     }
+
+    public function coustomer()
+{
+    return $this->belongsTo(User::class);
+}
+
 }
