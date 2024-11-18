@@ -38,30 +38,5 @@ class WishlistController extends Controller
         return redirect()->back();
     }
 
-//     public function move_to_cart($rowId)
-// {
-//     // প্রথমে চেক করি যে 'wishlist' কার্টে ঐ আইটেমটি আছে কি না
-//     $item = Cart::instance('wishlist')->get($rowId);
-
-//     // যদি আইটেমটি পাওয়া না যায়
-//     if (!$item) {
-//         return redirect()->back()->with('error', 'Item not found in the wishlist.');
-//     }
-
-//     // 'wishlist' থেকে আইটেমটি সরিয়ে ফেলুন
-//     Cart::instance('wishlist')->remove($rowId);
-
-//     // 'cart' (শপিং কার্ট) এ আইটেমটি যোগ করুন
-//     Cart::instance('cart')->add([
-//         'id' => $item->id, // পণ্যের আইডি
-//         'name' => $item->name, // পণ্যের নাম
-//         'quantity' => $item->qty, // পরিমাণ
-//         'price' => $item->price, // দাম
-//         'attributes' => $item->attributes, // অতিরিক্ত বৈশিষ্ট্য (যদি থাকে)
-//     ])->associate('App\Models\Product'); // পণ্যের মডেল অ্যাসোসিয়েট করা
-
-//     // পুনরায় ব্যবহারকারীকে আগের পৃষ্ঠায় নিয়ে আসুন, সফল বার্তা সহ
-//     return redirect()->back()->with('success', 'Item successfully moved to the cart.');
-// }
 
 }

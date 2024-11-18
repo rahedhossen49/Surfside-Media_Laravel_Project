@@ -108,7 +108,7 @@
                                         class="body-title-2">{{$item->product->name}}</a>
                                 </div>
                             </td>
-                            <td class="text-center">${{$item->price}}</td>
+                            <td class="text-center">{{$item->price}} Taka</td>
                             <td class="text-center">{{$item->quantity}}</td>
                             <td class="text-center">{{$item->product->SKU}}</td>
                             <td class="text-center">{{$item->product->category->name}}</td>
@@ -156,15 +156,15 @@
                 <tbody>
                     <tr>
                         <th>Subtotal</th>
-                        <td>${{$order->subtotal}}</td>
+                        <td>{{$order->subtotal}} Taka</td>
                         <th>Tax</th>
-                        <td>${{$order->tax}}</td>
+                        <td>{{$order->tax}} Taka</td>
                         <th>Discount</th>
                         <td>{{$order->discount}}</td>
                     </tr>
                     <tr>
                         <th>Total</th>
-                        <td>${{$order->total}}</td>
+                        <td>{{$order->total}} Taka</td>
                         <th>Payment Mode</th>
                         <td>{{$transaction->mode}}</td>
                         <th>Status</th>

@@ -58,7 +58,7 @@ Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->
 
 //! Account Dashboard
 Route::middleware(['auth'])->group(function(){
-    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+    Route::get('/my-account', [UserController::class, 'user_account'])->name('user.user_account');
     Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
     Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
     Route::put('/account-order/cancel-order', [UserController::class, 'order_cancel'])->name('user.order.cancel');
@@ -99,8 +99,8 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::put('/admin/coupon/update',[AdminController::class,'coupon_update'])->name('admin.coupon.update');
     Route::delete('/admin/coupons/{id}/delete',[AdminController::class,'coupon_delete'])->name('admin.coupon.update');
     Route::get('/admin/coupon/{id}/edit', [AdminController::class, 'coupon_edit'])->name('admin.coupon.edit');
-    Route::put('/admin/coupon/update', [AdminController::class, 'coupon_update'])->name('admin.coupon.update');  // PUT রুট
-    Route::delete('/admin/coupons/{id}/delete', [AdminController::class, 'coupon_delete'])->name('admin.coupon.delete');  // DELETE রুটের জন্য আলাদা নাম
+    Route::put('/admin/coupon/update', [AdminController::class, 'coupon_update'])->name('admin.coupon.update');  // PUT রু Taka
+    Route::delete('/admin/coupons/{id}/delete', [AdminController::class, 'coupon_delete'])->name('admin.coupon.delete');  // DELETE রু Takaের জন্য আলাদা নাম
 
   //! orders route
     Route::get('/admin/orders',[AdminController::class,'orders'])->name('admin.orders');

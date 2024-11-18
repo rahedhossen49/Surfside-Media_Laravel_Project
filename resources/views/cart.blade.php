@@ -65,14 +65,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="shopping-cart__product-item__detail">
-                                            <h4>{{ $item->name }}</h4>
-                                            <ul class="shopping-cart__product-item__options">
-                                                <li>Color: Yellow</li>
-                                                <li>Size: L</li>
-                                            </ul>
-                                        </div>
-                                    </td>
+
                                     <td>
                                         <span class="shopping-cart__product-price">${{ $item->price }}</span>
                                     </td>
@@ -181,7 +174,7 @@
                                 </tr>
                                 <tr>
                                     <th>VAT</th>
-                                    <td>${{Session::get('discounts')['tax']}}</td>
+                                    <td>${{Session::get('discounts')['tax']}}k</td>
                                 </tr>
                                 <tr>
                                     <th>Total</th>

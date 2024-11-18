@@ -323,7 +323,7 @@
 
             <div class="logo">
                 <a href="{{ route('home.index') }}">
-                    <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" />
+                    <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Uomo" class="logo__image d-block" />
                 </a>
             </div>
 
@@ -445,7 +445,7 @@
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
                     <a href="{{ route('home.index') }}">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo"
+                        <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Uomo"
                             class="logo__image d-block" />
                     </a>
                 </div>
@@ -465,7 +465,7 @@
                             <a href="about.html" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contact</a>
+                            <a href="{{route('home.contact')}}" class="navigation__link">Contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -518,7 +518,7 @@
                         </div>
                     @else
                         <div class="header-tools__item hover-container">
-                            <a href="{{ Auth::user()->utype === 'ADM' ? route('admin.index') : route('user.index') }}"
+                            <a href="{{ Auth::user()->utype === 'ADM' ? route('admin.index') : route('user.user_account') }}"
                                 class="header-tools__item">
                                 <span class="pr-6px">{{ Auth::user()->name }}</span>
                                 <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -573,7 +573,7 @@
                 <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
                     <div class="logo">
                         <a href="{{ route('home.index') }}">
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="SurfsideMedia"
+                            <img src="{{ asset('assets/images/logo/logo.png') }}" alt="SurfsideMedia"
                                 class="logo__image d-block" />
                         </a>
                     </div>
@@ -631,31 +631,12 @@
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About
                                 Us</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="blog_list1.html"
-                                class="menu-link menu-link_us-s">Blog</a></li>
+
                         <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact
                                 Us</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Shop</h6>
-                    <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New
-                                Arrivals</a></li>
-                        <li class="sub-menu__item"><a href="shop3.html"
-                                class="menu-link menu-link_us-s">Accessories</a></li>
-                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
-                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a>
-                        </li>
-                    </ul>
-                </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Help</h6>
@@ -665,23 +646,19 @@
                         <li class="sub-menu__item"><a href="account_dashboard.html"
                                 class="menu-link menu-link_us-s">My Account</a>
                         </li>
-                        <li class="sub-menu__item"><a href="store_location.html"
-                                class="menu-link menu-link_us-s">Find a Store</a>
-                        </li>
+
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal &
                                 Privacy</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a>
-                        </li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Categories</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Computer</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Mobile</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Laptop</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Hard Disk</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a>
                         </li>
                     </ul>

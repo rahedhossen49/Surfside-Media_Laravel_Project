@@ -109,7 +109,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.brand.add') }}" class="">
+                                            <a href="{{ route('admin.category.add') }}" class="">
                                                 <div class="text">New Category</div>
                                             </a>
                                         </li>
@@ -206,7 +206,7 @@
                                     <fieldset class="name">
                                         <input type="text" placeholder="Search here..." class="show-search"
                                             name="name" tabindex="2" id="search-input" value=""
-                                            aria-required="true" required="" autocomplete="off" >
+                                            aria-required="true" required="" autocomplete="off">
                                     </fieldset>
                                     <div class="button-submit">
                                         <button class="" type="submit"><i class="icon-search"></i></button>

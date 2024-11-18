@@ -123,7 +123,7 @@
                                 <use href="#icon_star" />
                             </svg>
                         </div>
-                        <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
+                        <span class="reviews-note text-lowercase text-secondary ms-1">reviews</span>
                     </div>
                     <div class="product-single__price">
                         <span class="current-price">
@@ -133,7 +133,7 @@
                                     <s>${{ $product->regular_price }}</s>
                                 @endif
                             @else
-                                ${{ $product->regular_price }}
+                               ${{ $product->regular_price }}
                             @endif
 
                         </span>
@@ -517,7 +517,7 @@
                                     <div class="product-card__price d-flex">
                                         <span class="money price">
                                             @if ($product->sale_price)
-                                                <s>${{ $rproduct->regular_price }}</s> ${{ $rproduct->sale_price }}
+                                                <s>{{ $rproduct->regular_price }} $</s> ${{ $rproduct->sale_price }}
                                             @else
                                                 ${{ $product->regular_price }}
                                             @endif

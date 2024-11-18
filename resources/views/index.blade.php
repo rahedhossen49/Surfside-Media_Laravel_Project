@@ -14,7 +14,7 @@
         "effect": "fade",
         "loop": true
       }'>
-      <div class="swiper-wrapper">
+      {{-- <div class="swiper-wrapper">
         @foreach ($slides as $slide )
 
         <div class="swiper-slide">
@@ -41,9 +41,18 @@
             </div>
           </div>
         </div>
-        @endforeach
+        @endforeach --}}
+        <div class="swiper-wrapper">
+            @foreach ($slides as $slide )
+            <div class="swiper-slide">
+                <div class="container-fluid mt-1 px-3">
+                    <div class="position-relative">
+                        <img src="{{ asset('uploads/slides/' . $slide->image) }}" alt="Slide Image" class="img-fluid rounded pt-3 px-2" />
+                    </div>
+                </div>
+            </div>
+            @endforeach
       </div>
-
       <div class="container">
         <div
           class="slideshow-pagination slideshow-number-pagination d-flex align-items-center position-absolute bottom-0 mb-5">
@@ -53,7 +62,7 @@
     <div class="container mw-1620 bg-white border-radius-10">
       <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
       <section class="category-carousel container">
-        <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">You Might Like</h2>
+        <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">Categories</h2>
 
         <div class="position-relative">
           <div class="swiper-container js-swiper-slider" data-settings='{
@@ -214,7 +223,7 @@
                       <div class="product-card__price d-flex">
                         <span class="money price text-secondary">
                             @if ($sproduct->sale_price)
-                            <s>${{ $sproduct->regular_price }}</s> ${{ $sproduct->sale_price }}
+                            <s>${{ $sproduct->regular_price }} </s> ${{ $sproduct->sale_price }}
                         @else
                             ${{ $sproduct->regular_price }}
                         @endif
@@ -257,7 +266,7 @@
                 <div class="product-card__price d-flex align-items-center">
                   <span class="money price text-secondary">
                     @if ($fproduct->sale_price)
-                    <s>${{ $fproduct->regular_price }}</s> ${{ $fproduct->sale_price }}
+                    <s>{{ $fproduct->regular_price }} $</s> ${{ $fproduct->sale_price }}
                 @else
                     ${{ $fproduct->regular_price }}
                 @endif

@@ -18,7 +18,7 @@ let UomoSelectors = {
 // Utility functions
 let UomoHelpers = {
   isMobile: false,
-  sideStkEl: {},
+  sideSটEl: {},
 
   debounce: (callback, wait, immediate = false) => {
     let timeout = null;
@@ -521,15 +521,15 @@ function pureFadeOut(e) {
           const $grid = $sticky.previousElementSibling || $sticky.nextElementSibling;
           const $target = $grid.offsetHeight > $sticky.offsetHeight ? $sticky : $grid;
 
-          $target.lastKnownY = window.scrollY;
-          if (!UomoHelpers.sideStkEl.currentTop) {
-            UomoHelpers.sideStkEl.currentTop = 0;
+          $target.lasownY = window.scrollY;
+          if (!UomoHelpers.sideSl.currentTop) {
+            UomoHelpers.sideSl.currentTop = 0;
           } else {
             return;
           }
 
 
-          UomoHelpers.sideStkEl.initialTopOffset = parseInt(window.getComputedStyle($target).top);
+          UomoHelpers.sideSl.initialTopOffset = parseInt(window.getComputedStyle($target).top);
         });
 
         window.addEventListener('scroll', this._updateStatus);
@@ -543,20 +543,20 @@ function pureFadeOut(e) {
           const $target = $grid.offsetHeight > $sticky.offsetHeight ? $sticky : $grid;
 
           var bounds = $target.getBoundingClientRect(),
-              maxTop = bounds.top + window.scrollY - $target.offsetTop + UomoHelpers.sideStkEl.initialTopOffset,
+              maxTop = bounds.top + window.scrollY - $target.offsetTop + UomoHelpers.sideSl.initialTopOffset,
               minTop = $target.clientHeight - window.innerHeight + 30;
 
-          if (window.scrollY < $target.lastKnownY) {
-            UomoHelpers.sideStkEl.currentTop -= window.scrollY - $target.lastKnownY;
+          if (window.scrollY < $target.lasownY) {
+            UomoHelpers.sideSl.currentTop -= window.scrollY - $target.lasটwnY;
           } else {
-            UomoHelpers.sideStkEl.currentTop += $target.lastKnownY - window.scrollY;
+            UomoHelpers.sideSl.currentTop += $target.lasটwnY - window.scrollY;
           }
 
 
-          UomoHelpers.sideStkEl.currentTop = Math.min(Math.max(UomoHelpers.sideStkEl.currentTop, -minTop), maxTop, UomoHelpers.sideStkEl.initialTopOffset);
-          $target.lastKnownY = window.scrollY;
+          UomoHelpers.sideSl.currentTop = Math.min(Math.max(UomoHelpers.sideSট.currentTop, -minTop), maxTop, UomoHelpers.sideSটEinitialTopOffset);
+          $target.lasownY = window.scrollY;
 
-          $target.style.top = UomoHelpers.sideStkEl.currentTop + 'px';
+          $target.style.top = UomoHelpers.sideSl.currentTop + 'px';
         });
       }
     });
@@ -583,7 +583,7 @@ function pureFadeOut(e) {
 
       // Set sticky active class from
       this.stickyMinPos = 25;
-      this.stkHd = false;
+      this.sd = false;
 
       this._init = this._init.bind(this);
       this._stickyScrollHander = this._stickyScrollHander.bind(this);
@@ -969,7 +969,7 @@ function pureFadeOut(e) {
       $('.product-single__thumbnail .swiper-slide').css({height:'auto'});
           var currentSlide = that.activeIndex;
           var newHeight = $(that.slides[currentSlide]).height();
-  
+
           $('.product-single__thumbnail .swiper-wrapper, .product-single__thumbnail .swiper-slide').css({ height : newHeight })
           that.update();
      }
@@ -1111,14 +1111,14 @@ function pureFadeOut(e) {
             }
           })
         })
-      
+
         // Mouseover event
         star.addEventListener('mouseleave', (e) => {
           stars.forEach((item) => {
             item.classList.remove('is-overed');
           })
         })
-      
+
         // Click event
         star.addEventListener('click', (e) => {
           const selected_index = stars.indexOf(e.target);
@@ -1393,7 +1393,7 @@ function pureFadeOut(e) {
       });
 
       const btn_player = $(this);
-  
+
       $($(this).data("video")).off("ended").on("ended", function() {
         $(btn_player).removeClass("playing");
         this.currentTime = 0;

@@ -42,10 +42,9 @@
               </div>
             </div>
 
-
             @if ($address)
 
-<div class="row">
+    <div class="row">
     <div class="col-md-12">
         <div class="my-account__address-list">
             <div class="my-account__address-item_detail">

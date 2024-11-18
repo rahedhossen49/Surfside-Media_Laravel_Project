@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function user_account(){
 
-        return view('user.index');
+        return view('user.user_account');
     }
 
     public function orders()
@@ -45,4 +45,7 @@ class UserController extends Controller
         $order->save();
         return back()->with('status',"Order has been cancelled successfully");
     }
+
+
+
 }
