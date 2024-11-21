@@ -59,22 +59,23 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $user->id }}</td>
-                                        <td >
-                                        {{ $user->name }}
+                                        <td>
+                                            {{ $user->name }}
                                         </td>
                                         <td>{{ $user->mobile }}</td>
                                         <td>{{ $user->email }}</td>
-                                            <td class="text-center">
-                                                <a href="{{ route('admin.orders', ['id' => $user->id]) }}" target="_blank">
-                                                    View Orders
-                                                </a>
+                                        <td class="text-center">
+                                            <a href="{{ route('admin.orders', ['id' => $user->id]) }}" target="_blank">
+                                                {{ $user->orders->count() > 0 ? $user->orders->count() : 0 }}
+                                            </a>
                                         </td>
+
 
                                         <td>
                                             <div class="list-icon-function">
                                                 <!-- Delete button -->
-                                                <form action="{{ route('admin.user.delete', $user->id) }}"
-                                                    method="POST" style="display: inline;">
+                                                <form action="{{ route('admin.user.delete', $user->id) }}" method="POST"
+                                                    style="display: inline;">
                                                     @csrf
                                                     @method('DELETE') <!-- Laravel DELETE method -->
                                                     <button type="submit" class="item delete"

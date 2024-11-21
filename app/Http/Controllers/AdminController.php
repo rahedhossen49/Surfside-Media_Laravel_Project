@@ -785,12 +785,6 @@ class AdminController extends Controller
     }
 
 
-    public function user()
-    {
-
-        return view('admin.user');
-    }
-
     public function showCustomers()
     {
         $users = User::with('orders')->where('utype', 'USR')->get();
