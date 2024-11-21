@@ -67,7 +67,7 @@
                                     <td>
 
                                     <td>
-                                        <span class="shopping-cart__product-price">${{ $item->price }}</span>
+                                        <span class="shopping-cart__product-price">Tk {{ $item->price }}</span>
                                     </td>
                                     <td>
                                         <div class="qty-control position-relative">
@@ -88,7 +88,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="shopping-cart__subtotal">${{ $item->subTotal() }}</span>
+                                        <span class="shopping-cart__subtotal">Tk {{ $item->subTotal() }}</span>
                                     </td>
                                     <td>
                                         <form action="{{route('cart.item.remove',['rowId'=>$item->rowId])}}" method="POSt">
@@ -158,15 +158,15 @@
                             <tbody>
                                 <tr>
                                     <th>Subtotal</th>
-                                    <td>${{ Cart::instance('cart')->subtotal() }}</td>
+                                    <td>Tk {{ Cart::instance('cart')->subtotal() }}</td>
                                 </tr>
                                 <tr>
                                     <th>Discount {{Session::get('coupon')['code']}}</th>
-                                    <td>${{Session::get('discounts')['discount']}}</td>
+                                    <td>Tk {{Session::get('discounts')['discount']}}</td>
                                 </tr>
                                 <tr>
                                     <th>Subtotal After Discount</th>
-                                    <td>${{Session::get('discounts')['subtotal']}}</td>
+                                    <td>Tk {{Session::get('discounts')['subtotal']}}</td>
                                 </tr>
                                 <tr>
                                     <th>Shipping</th>
@@ -174,11 +174,11 @@
                                 </tr>
                                 <tr>
                                     <th>VAT</th>
-                                    <td>${{Session::get('discounts')['tax']}}k</td>
+                                    <td>Tk {{Session::get('discounts')['tax']}}k</td>
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <td>${{Session::get('discounts')['total']}}</td>
+                                    <td>Tk {{Session::get('discounts')['total']}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -187,7 +187,7 @@
                             <tbody>
                                 <tr>
                                     <th>Subtotal</th>
-                                    <td>${{ Cart::instance('cart')->subtotal() }}</td>
+                                    <td>Tk {{ Cart::instance('cart')->subtotal() }}</td>
                                 </tr>
                                 <tr>
                                     <th>Shipping</th>
@@ -195,11 +195,11 @@
                                 </tr>
                                 <tr>
                                     <th>VAT</th>
-                                    <td>${{ Cart::instance('cart')->tax() }}</td>
+                                    <td>Tk {{ Cart::instance('cart')->tax() }}</td>
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <td>${{ Cart::instance('cart')->total() }}</td>
+                                    <td>Tk {{ Cart::instance('cart')->total() }}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -24,7 +24,7 @@ class AdminController extends Controller
     public function index()
     {
 
-        // $admins = User::where('utype', 'ADM')->get();
+        $admins = User::where('utype', 'ADM')->get();
 
         $orders = Order::orderBy('created_at', 'DESC')->get()->take(10);
         $dashboardDatas = DB::select("Select sum(total) As TotalAmount,
@@ -59,20 +59,30 @@ class AdminController extends Controller
         MONTH(created_at) ORDER BY MONTH(created_at)) D ON D.MonthNo = M.id
       ORDER BY M.id");
 
-      $AmountM = implode(',', collect($monthlyDatas)->pluck('TotalAmount')->toArray());
-      $OrderedAmountM = implode(',', collect($monthlyDatas)->pluck('TotalOrderedAmount')->toArray());
-      $DeliveredAmountM = implode(',', collect($monthlyDatas)->pluck('TotalDeliveredAmount')->toArray());
-      $CanceledAmountM = implode(',', collect($monthlyDatas)->pluck('TotalCanceledAmount')->toArray());
+        $AmountM = implode(',', collect($monthlyDatas)->pluck('TotalAmount')->toArray());
+        $OrderedAmountM = implode(',', collect($monthlyDatas)->pluck('TotalOrderedAmount')->toArray());
+        $DeliveredAmountM = implode(',', collect($monthlyDatas)->pluck('TotalDeliveredAmount')->toArray());
+        $CanceledAmountM = implode(',', collect($monthlyDatas)->pluck('TotalCanceledAmount')->toArray());
 
-      $totalAmount = collect($monthlyDatas)->sum('TotalAmount');
-      $totalOrderedAmount = collect($monthlyDatas)->sum('TotalOrderedAmount');
-      $totalDeliveredAmount = collect($monthlyDatas)->sum('TotalDeliveredAmount');
-      $totalCanceledAmount = collect($monthlyDatas)->sum('TotalCanceledAmount');
+        $totalAmount = collect($monthlyDatas)->sum('TotalAmount');
+        $totalOrderedAmount = collect($monthlyDatas)->sum('TotalOrderedAmount');
+        $totalDeliveredAmount = collect($monthlyDatas)->sum('TotalDeliveredAmount');
+        $totalCanceledAmount = collect($monthlyDatas)->sum('TotalCanceledAmount');
 
 
-    return view('admin.index', compact('orders', 'dashboardDatas','AmountM','OrderedAmountM',
-    'DeliveredAmountM','CanceledAmountM','totalAmount','totalOrderedAmount','totalDeliveredAmount','totalCanceledAmount'));
-
+        return view('admin.index', compact(
+            'orders',
+            'dashboardDatas',
+            'AmountM',
+            'OrderedAmountM',
+            'DeliveredAmountM',
+            'CanceledAmountM',
+            'totalAmount',
+            'totalOrderedAmount',
+            'totalDeliveredAmount',
+            'totalCanceledAmount',
+            'admins',
+        ));
     }
 
 
@@ -98,7 +108,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:brands,slug',
-            'image' => 'mimes:png,jpg,jpeg|max:2048'
+            'image' => 'mimes:png,jpg,jpeg,webp|max:2048'
         ]);
 
         $brand = new Brand();
@@ -198,7 +208,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories,slug',
-            'image' => 'mimes:png,jpg,jpeg|max:2048'
+            'image' => 'mimes:png,jpg,jpeg,webp|max:2048'
         ]);
 
         $category = new Category();
@@ -240,7 +250,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories,slug,' . $category->id,
-            'image' => 'mimes:png,jpg,jpeg|max:2048'
+            'image' => 'mimes:png,jpg,jpeg,webp|max:2048'
         ]);
 
         $category->name = $request->name;
@@ -305,8 +315,8 @@ class AdminController extends Controller
                 'slug' => 'required|unique:products,slug',
                 'short_description' => 'required',
                 'description' => 'required',
-                'regular_price' => 'required',
-                'sale_price' => 'required',
+                'regular_price' => 'required|numeric',
+                'sale_price' => 'required|numeric',
                 'SKU' => 'required',
                 'stock_status' => 'required',
                 'featured' => 'required',
@@ -330,8 +340,8 @@ class AdminController extends Controller
         $product->slug = Str::slug($request->name);
         $product->short_description = $request->short_description;
         $product->description = $request->description;
-        $product->regular_price = $request->regular_price;
-        $product->sale_price = $request->sale_price;
+        $product->regular_price = floatval(str_replace(',', '', $request->regular_price)); // Ensure it's a float
+        $product->sale_price = floatval(str_replace(',', '', $request->sale_price));     // Ensure it's a floatsplay with 2 decimal places
         $product->SKU = $request->SKU;
         $product->stock_status = $request->stock_status;
         $product->featured = $request->featured;
@@ -354,7 +364,7 @@ class AdminController extends Controller
         $counter = 1;
 
         if ($request->hasFile('images')) {
-            $allowedfileExtension = ['jpg', 'png', 'jpeg','webp'];
+            $allowedfileExtension = ['jpg', 'png', 'jpeg', 'webp'];
             $files = $request->file('images');
             foreach ($files as  $file) {
                 $gextension = $file->getClientOriginalExtension();
@@ -413,8 +423,8 @@ class AdminController extends Controller
                 'slug' => 'required|unique:products,slug,' . $request->id,
                 'short_description' => 'required',
                 'description' => 'required',
-                'regular_price' => 'required',
-                'sale_price' => 'required',
+                'regular_price' => 'required|numeric',
+                'sale_price' => 'required|numeric',
                 'SKU' => 'required',
                 'stock_status' => 'required',
                 'featured' => 'required',
@@ -439,8 +449,8 @@ class AdminController extends Controller
         $product->slug = Str::slug($request->name);
         $product->short_description = $request->short_description;
         $product->description = $request->description;
-        $product->regular_price = $request->regular_price;
-        $product->sale_price = $request->sale_price;
+        $product->regular_price = floatval(str_replace(',', '', $request->regular_price)); // Ensure it's a float
+        $product->sale_price = floatval(str_replace(',', '', $request->sale_price));     // Ensure it's a float
         $product->SKU = $request->SKU;
         $product->stock_status = $request->stock_status;
         $product->featured = $request->featured;
@@ -478,7 +488,7 @@ class AdminController extends Controller
                     File::delete(public_path('uploads/products/thumbnails') . '/' . $ofile);
                 }
             }
-            $allowedfileExtension = ['jpg', 'png', 'jpeg','webp'];
+            $allowedfileExtension = ['jpg', 'png', 'jpeg', 'webp'];
             $files = $request->file('images');
             foreach ($files as $file) {
                 $gextension = $file->getClientOriginalExtension();
@@ -751,20 +761,23 @@ class AdminController extends Controller
     }
 
 
-    public function contacts(){
+    public function contacts()
+    {
 
-        $contacts = Contact::orderBy('created_at','DESC')->paginate(10);
+        $contacts = Contact::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.contacts', compact('contacts'));
     }
 
-    public function contact_delete($id){
+    public function contact_delete($id)
+    {
 
         $contact = Contact::find($id);
         $contact->delete();
         return redirect()->route('admin.contacts')->with('status', 'Contact deleted successfully!');
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
         $query = $request->input('query');
         $result = Product::where('name', 'LIKE', "%$query%")->get()->take(8);
@@ -772,28 +785,25 @@ class AdminController extends Controller
     }
 
 
-    public function user(){
+    public function user()
+    {
 
         return view('admin.user');
     }
 
-    public function showCustomers() {
+    public function showCustomers()
+    {
         $users = User::with('orders')->where('utype', 'USR')->get();
 
         return view('admin.user', compact('users'));
     }
 
     public function deleteCustomer($id)
-{
-    $user = User::findOrFail($id);
+    {
+        $user = User::findOrFail($id);
 
-    $user->delete();
+        $user->delete();
 
-    return redirect()->route('admin.user')->with('success', 'Customer deleted successfully!');
-}
-
-
-
-
-
+        return redirect()->route('admin.user')->with('success', 'Customer deleted successfully!');
+    }
 }

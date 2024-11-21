@@ -22,7 +22,7 @@
             </div>
 
             <div class="wg-box">
-                <div class="flex items-center justify-between gap10 flex-wrap">
+                <div class="flex items-center justify-between gap5 flex-wrap">
                     <div class="wg-filter flex-grow">
                         <form class="form-search">
                             <fieldset class="name">
@@ -34,22 +34,24 @@
                             </div>
                         </form>
                     </div>
-                    <a class="tf-button style-1 w208" href="{{route('admin.slide.add')}}"><i class="icon-plus"></i>Add new</a>
+                    <a class="tf-button style-1 w208" href="{{ route('admin.slide.add') }}"><i class="icon-plus"></i>Add
+                        new</a>
                 </div>
                 <div class="wg-table table-all-user">
                     @if (Session::has('status'))
-                        <p class="alert alert-success">{{Session::get('status')}}</p>
+                        <p class="alert alert-success">{{ Session::get('status') }}</p>
                     @endif
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Id</th>
                                 <th>Image</th>
-                                <th>Tagline</th>
+                                {{-- <th>Tagline</th>
                                 <th>Title</th>
                                 <th>Subtitle</th>
-                                <th>Link</th>
-                                <th>Action</th>
+                                <th>Link</th> --}}
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,7 +60,8 @@
                                     <td>{{ $slide->id }}</td>
                                     <td class="pname">
                                         <div class="image">
-                                            <img src="{{asset('uploads/slides')}}/{{$slide->image}}" alt="{{$slide->title}}" class="image">
+                                            <img src="{{ asset('uploads/slides') }}/{{ $slide->image }}"
+                                                alt="{{ $slide->title }}" class="image">
                                         </div>
                                     </td>
                                     <td>{{ $slide->tagline }}</td>
@@ -67,55 +70,58 @@
                                     <td>{{ $slide->link }}</td>
                                     <td>
                                         <div class="list-icon-function">
-                                            <a href="{{route('admin.slide.edit',['id'=>$slide->id])}}">
+                                            <a href="{{ route('admin.slide.edit', ['id' => $slide->id]) }}">
                                                 <div class="item edit">
                                                     <i class="icon-edit-3"></i>
                                                 </div>
                                             </a>
-                                            <form action="{{route('admin.slide.delete',['id'=>$slide->id])}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <div class="item text-danger delete">
-                                                    <i class="icon-trash-2"></i>
-                                                </div>
-                                            </form>
-                                        </div>
                                     </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    <td>
+                                        <form action="{{ route('admin.slide.delete', ['id' => $slide->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="item text-danger delete">
+                                                <i class="icon-trash-2"></i>
+                                            </div>
+                                        </form>
                 </div>
-                <div class="divider"></div>
-                <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                    {{$slides->links('pagination::bootstrap-5')}}
+                </td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
+                {{ $slides->links('pagination::bootstrap-5') }}
 
-                </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 
 
 
 @push('scripts')
-<script>
-    $(function() {
-        $('.delete').on('click', function(e) {
-            e.preventDefault();
-            var form = $(this).closest('form');
-            swal({
-                title: "Are You Sure",
-                text: "You Want to Delete this record?",
-                type: 'warning',
-                buttons: ["No", "Yes"],
-                confirmButtonColor: '#dc3545',
-            }).then(function(result) {
-                if (result) {
-                    form.submit();
-                }
+    <script>
+        $(function() {
+            $('.delete').on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title: "Are You Sure",
+                    text: "You Want to Delete this record?",
+                    type: 'warning',
+                    buttons: ["No", "Yes"],
+                    confirmButtonColor: '#dc3545',
+                }).then(function(result) {
+                    if (result) {
+                        form.submit();
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 @endpush

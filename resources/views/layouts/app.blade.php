@@ -307,6 +307,11 @@
         #box-content-search li {
             margin-bottom: 10px;
         }
+
+        #banner-custom {
+            position: absolute;
+            top: 120px;
+        }
     </style>
 
 
@@ -368,11 +373,12 @@
                         <li class="navigation__item">
                             <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
                         </li>
+
                         <li class="navigation__item">
                             <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">About</a>
+                            <a href="{{ route('home.about') }}" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
                             <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
@@ -446,8 +452,8 @@
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
                     <a href="{{ route('home.index') }}">
-                        <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Uomo"
-                            class="logo__image d-block" />
+                        <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Uomo" class="d-block"
+                            height="80" width="80" />
                     </a>
                 </div>
 
@@ -459,11 +465,12 @@
                         <li class="navigation__item">
                             <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
                         </li>
+
                         <li class="navigation__item">
                             <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">About</a>
+                            <a href="{{ route('home.about') }}" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
                             <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>

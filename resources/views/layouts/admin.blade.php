@@ -165,7 +165,7 @@
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="{{route('admin.user')}}" class="">
+                                    <a href="{{ route('admin.user') }}" class="">
                                         <div class="icon"><i class="icon-user"></i></div>
                                         <div class="text">User</div>
                                     </a>
@@ -308,11 +308,13 @@
                                                     <img src="images/avatar/user-1.png')}}" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    {{-- @foreach($admins as $admin)
-
-                                                    <span class="body-title mb-2">{{$admin->name}}</span>
+                                                    {{-- @foreach ($admins as $admin)
+                                                        <span class="body-title mb-2">{{ $admin->name }}</span>
                                                     @endforeach --}}
-
+                                                    @if (Auth::check())
+                                                        <span class="body-title mb-2">
+                                                            {{ Auth::user()->name }}</span>
+                                                    @endif
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>

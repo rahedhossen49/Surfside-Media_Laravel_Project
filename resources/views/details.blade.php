@@ -1,16 +1,16 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 
 @section('content')
 
-<style>
-    .filled-heart{
-        color:orange;
-    }
-</style>
+    <style>
+        .filled-heart {
+            color: orange;
+        }
+    </style>
     <main class="pt-90">
         <div class="mb-md-1 pb-md-3"></div>
-        <section class="product-single container">
+        <section class="product-single container mt-5">
             <div class="row">
                 <div class="col-lg-7">
                     <div class="product-single__media" data-media-type="vertical-thumbnail">
@@ -83,8 +83,8 @@
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="d-flex justify-content-between mb-4 pb-md-2">
-                        <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
+                    {{-- <div class="d-flex justify-content-between mb-4 pb-md-2">
+                         <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
                             <a href="{{ route('home.index') }}"
                                 class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
                             <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
@@ -102,8 +102,8 @@
                                     viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_next_md" />
                                 </svg></a>
-                        </div><!-- /.shop-acs -->
-                    </div>
+                        </div><!-- /.shop-acs --> -
+                    </div> --}}
                     <h1 class="product-single__name">{{ $product->name }}</h1>
                     <div class="product-single__rating">
                         <div class="reviews-group d-flex">
@@ -128,12 +128,12 @@
                     <div class="product-single__price">
                         <span class="current-price">
                             @if ($product->sale_price)
-                                ${{ $product->sale_price }}
+                                Tk {{ $product->sale_price }}
                                 @if ($product->regular_price)
-                                    <s>${{ $product->regular_price }}</s>
+                                    <s>Tk {{ $product->regular_price }}</s>
                                 @endif
                             @else
-                               ${{ $product->regular_price }}
+                                Tk {{ $product->regular_price }}
                             @endif
 
                         </span>
@@ -154,8 +154,7 @@
                                     <div class="qty-control__increase">+</div>
                                 </div><!-- .qty-control -->
                                 <button type="submit" class="btn btn-primary btn-addtocart " data-aside="cartDrawer">Add
-                                    to Cart
-                                    Cart</button>
+                                    to Cart</button>
                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                 <input type="hidden" name="name" value="{{ $product->name }}">
                                 <input type="hidden" name="price"
@@ -166,28 +165,35 @@
                     @endif
                     <div class="product-single__addtolinks">
 
-                        @if (Cart::instance('wishlist')->content()->where('id',$product->id)->count()>0)
-                        <form action="{{ route('wishlist.item.remove',['rowId'=>Cart::instance('wishlist')->content()->where('id',$product->id)->first()->rowId]) }}" method="POST" id="frm-remove-item">
-                        @csrf
-                        @method('DELETE')
-                        <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart" onclick="document.getElementById('frm-remove-item').submit();"><svg width="16"
-                                height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_heart" />
-                            </svg><span>Remove from Wishlist</span></a>
-                        </form>
-                            @else
+                        @if (Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
+                            <form
+                                action="{{ route('wishlist.item.remove', ['rowId' => Cart::instance('wishlist')->content()->where('id', $product->id)->first()->rowId]) }}"
+                                method="POST" id="frm-remove-item">
+                                @csrf
+                                @method('DELETE')
+                                <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart"
+                                    onclick="document.getElementById('frm-remove-item').submit();"><svg width="16"
+                                        height="16" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg><span>Remove from Wishlist</span></a>
+                            </form>
+                        @else
                             <form action="{{ route('wishlist.add') }}" method="POST" id="wishlist-form">
                                 @csrf
-                                <input type="hidden" name="id" value="{{$product->id}}">
-                                <input type="hidden" name="name" value="{{$product->name}}">
-                                <input type="hidden" name="price" value="{{$product->sale_price == '' ? $product->regular_price : $product->sale_price}}"/>
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                <input type="hidden" name="price"
+                                    value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />
                                 <input type="hidden" name="quantity" value="1">
-                            <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist" onclick="document.getElementById('wishlist-form').submit()"><svg width="16"
-                                height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_heart" />
-                            </svg><span>Add to Wishlist</span></a>
+                                <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist"
+                                    onclick="document.getElementById('wishlist-form').submit()"><svg width="16"
+                                        height="16" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg><span>Add to Wishlist</span></a>
                             </form>
-                            @endif
+                        @endif
 
 
 
@@ -249,11 +255,11 @@
                             href="#tab-description" role="tab" aria-controls="tab-description"
                             aria-selected="true">Description</a>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    {{-- <li class="nav-item" role="presentation">
                         <a class="nav-link nav-link_underscore" id="tab-additional-info-tab" data-bs-toggle="tab"
                             href="#tab-additional-info" role="tab" aria-controls="tab-additional-info"
                             aria-selected="false">Additional Information</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item" role="presentation">
                         <a class="nav-link nav-link_underscore" id="tab-reviews-tab" data-bs-toggle="tab"
                             href="#tab-reviews" role="tab" aria-controls="tab-reviews" aria-selected="false">Reviews
@@ -517,9 +523,9 @@
                                     <div class="product-card__price d-flex">
                                         <span class="money price">
                                             @if ($product->sale_price)
-                                                <s>{{ $rproduct->regular_price }} $</s> ${{ $rproduct->sale_price }}
+                                                <s>Tk {{ $rproduct->regular_price }}</s> Tk {{ $rproduct->sale_price }}
                                             @else
-                                                ${{ $product->regular_price }}
+                                                Tk {{ $product->regular_price }}
                                             @endif
                                         </span>
                                     </div>

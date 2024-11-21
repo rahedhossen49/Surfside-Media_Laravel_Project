@@ -148,7 +148,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap10">
-                            <h4>${{$totalAmount}}</h4>
+                            <h4>Tk {{$totalAmount}}</h4>
 
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap10">
-                            <h4>${{$totalOrderedAmount}}</h4>
+                            <h4>Tk {{$totalOrderedAmount}}</h4>
                             </div>
                         </div>
                     <div>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap10">
-                            <h4>${{$totalDeliveredAmount}} </h4>
+                            <h4>Tk {{$totalDeliveredAmount}} </h4>
                             </div>
                         </div>
                     <div>
@@ -182,7 +182,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap10">
-                            <h4>${{$totalCanceledAmount}} </h4>
+                            <h4>Tk {{$totalCanceledAmount}} </h4>
                             </div>
                         </div>
                     </div>
@@ -229,9 +229,9 @@
                                             <td class="text-center">{{$order->id}}</td>
                                             <td class="text-center">{{$order->name}}</td>
                                             <td class="text-center">{{$order->phone}}</td>
-                                            <td class="text-center">${{$order->subtotal}} </td>
-                                            <td class="text-center">${{$order->tax}} </td>
-                                            <td class="text-center">${{$order->total}}</td>
+                                            <td class="text-center">Tk {{$order->subtotal}} </td>
+                                            <td class="text-center">Tk {{$order->tax}} </td>
+                                            <td class="text-center">Tk {{$order->total}}</td>
 
                                             <td class="text-center">
                                                 @if ($order->status == 'delivered')

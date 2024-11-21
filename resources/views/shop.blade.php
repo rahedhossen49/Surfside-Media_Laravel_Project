@@ -16,12 +16,12 @@
             margin-right: 0.75rem;
         }
 
-        .filled-heart{
-            color:orange;
+        .filled-heart {
+            color: orange;
         }
     </style>
 
-    <main class="pt-90">
+    <main>
         <section class="shop-main container d-flex pt-4 pt-xl-5">
             <div class="shop-sidebar side-sticky bg-body" id="shopFilter">
                 <div class="aside-header d-flex d-lg-none align-items-center">
@@ -30,45 +30,41 @@
                 </div>
 
                 <div class="pt-4 pt-lg-0"></div>
-
-                <div class="accordion" id="categories-list">
-
-
-                    <div class="accordion" id="price-filters">
-                        <div class="accordion-item mb-4">
-                            <h5 class="accordion-header mb-2" id="accordion-heading-price">
-                                <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#accordion-filter-price" aria-expanded="true"
-                                    aria-controls="accordion-filter-price">
-                                    Price
-                                    <svg class="accordion-button__icon type2" viewBox="0 0 10 6"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g aria-hidden="true" stroke="none" fill-rule="evenodd">
-                                            <path
-                                                d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
-                                        </g>
-                                    </svg>
-                                </button>
-                            </h5>
-                            <div id="accordion-filter-price" class="accordion-collapse collapse show border-0"
-                                aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
-                                <input class="price-range-slider" type="text" name="price_range" value=""
-                                    data-slider-min="1" data-slider-max="50000" data-slider-step="5"
-                                    data-slider-value="[{{ $min_price }},{{ $max_price }}]" data-currency="$" />
-                                <div class="price-range__info d-flex align-items-center mt-2">
-                                 <div class="me-auto">
-                                        <span class="text-secondary">Min Price: </span>
-                                        <span class="price-range__min">$1</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-secondary">Max Price: </span>
-                                        <span class="price-range__max">$50000</span>
-                                    </div>
+                <div class="accordion" id="price-filters">
+                    <div class="accordion-item mb-4">
+                        <h5 class="accordion-header mb-2" id="accordion-heading-price">
+                            <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#accordion-filter-price" aria-expanded="true"
+                                aria-controls="accordion-filter-price">
+                                Price
+                                <svg class="accordion-button__icon type2" viewBox="0 0 10 6"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g aria-hidden="true" stroke="none" fill-rule="evenodd">
+                                        <path
+                                            d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </h5>
+                        <div id="accordion-filter-price" class="accordion-collapse collapse show border-0"
+                            aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
+                            <input class="price-range-slider" type="text" name="price_range" value=""
+                                data-slider-min="1" data-slider-max="50000" data-slider-step="5"
+                                data-slider-value="[{{ $min_price }},{{ $max_price }}]" data-currency=" Tk " />
+                            <div class="price-range__info d-flex align-items-center mt-2">
+                                <div class="me-auto">
+                                    <span class="text-secondary">Min Price: </span>
+                                    <span class="price-range__min">Tk 1</span>
+                                </div>
+                                <div>
+                                    <span class="text-secondary">Max Price: </span>
+                                    <span class="price-range__max">Tk 50000</span>
                                 </div>
                             </div>
-                        </div>
+                        </div>1
                     </div>
-
+                </div>
+                <div class="accordion" id="categories-list">
                     <div class="accordion-item mb-4 pb-3">
                         <h5 class="accordion-header" id="accordion-heading-1">
                             <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button"
@@ -147,43 +143,16 @@
                 </div>
 
 
+
             </div>
 
             <div class="shop-list flex-grow-1">
-                <div class="swiper-container js-swiper-slider slideshow slideshow_small slideshow_split"
-                    data-settings='{
-            "autoplay": {
-              "delay": 5000
-            },
-            "slidesPerView": 1,
-            "effect": "fade",
-            "loop": true,
-            "pagination": {
-              "el": ".slideshow-pagination",
-              "type": "bullets",
-              "clickable": true
-            }
-          }'>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
 
-                                <div class="slide-split_media position-relative">
-                                    <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                                        <img loading="lazy" src="assets/images/shop/shop_banner.jpg" width="630"
-                                            height="450" alt="Women's accessories"
-                                            class="slideshow-bg__img object-fit-cover" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="container p-3 p-xl-5">
-                        <div
-                            class="slideshow-pagination d-flex align-items-center position-absolute bottom-0 mb-4 pb-xl-2">
-                        </div>
-
+                {{-- <div class="container p-3 p-xl-5">
+                    <div class="slideshow-pagination d-flex align-items-center position-absolute bottom-0 mb-4 pb-xl-2">
                     </div>
-                </div>
+
+                </div> --}}
 
                 <div class="mb-3 pb-2 pb-xl-3"></div>
 
@@ -327,9 +296,9 @@
                                     <div class="product-card__price d-flex">
                                         <span class="money price">
                                             @if ($product->sale_price)
-                                                <s>${{ $product->regular_price }} </s> ${{ $product->sale_price }}
+                                                <s>Tk {{ $product->regular_price }}</s> Tk {{ $product->sale_price }}
                                             @else
-                                                ${{ $product->regular_price }}
+                                                Tk {{ $product->regular_price }}
                                             @endif
                                         </span>
                                     </div>
@@ -359,38 +328,40 @@
                                         <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
                                     </div>
 
-                                    @if (Cart::instance('wishlist')->content()->where('id',$product->id)->count()>0)
-
-                                    <form action="{{ route('wishlist.item.remove',['rowId'=>Cart::instance('wishlist')->content()->where('id',$product->id)->first()->rowId]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                        <button
-                                           type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart"
-                                            title="Remove from Wishlist">
-                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_heart" />
-                                            </svg>
-                                        </button>
+                                    @if (Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
+                                        <form
+                                            action="{{ route('wishlist.item.remove', ['rowId' => Cart::instance('wishlist')->content()->where('id', $product->id)->first()->rowId]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart"
+                                                title="Remove from Wishlist">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <use href="#icon_heart" />
+                                                </svg>
+                                            </button>
                                         </form>
                                     @else
-                                    <form action="{{ route('wishlist.add') }}" method="POST">
-                                       @csrf
-                                       <input type="hidden" name="id" value="{{$product->id}}">
-                                       <input type="hidden" name="name" value="{{$product->name}}">
-                                       <input type="hidden" name="price" value="{{$product->sale_price == '' ? $product->regular_price : $product->sale_price}}"/>
-                                       <input type="hidden" name="quantity" value="1">
+                                        <form action="{{ route('wishlist.add') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price"
+                                                value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />
+                                            <input type="hidden" name="quantity" value="1">
 
 
-                                       <button
-                                           type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                            title="Add To Wishlist">
-                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_heart" />
-                                            </svg>
-                                        </button>
-                                    </form>
+                                            <button type="submit"
+                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
+                                                title="Add To Wishlist">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <use href="#icon_heart" />
+                                                </svg>
+                                            </button>
+                                        </form>
                                     @endif
                                 </div>
                             </div>

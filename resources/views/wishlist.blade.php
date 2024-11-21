@@ -42,7 +42,7 @@
                   </div>
                 </td>
                 <td>
-                  <span class="shopping-cart__product-price">${{$item->price}}</span>
+                  <span class="shopping-cart__product-price">Tk {{$item->price}}</span>
                 </td>
                 <td>
                   {{$item->qty}}
