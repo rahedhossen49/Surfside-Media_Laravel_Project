@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Review;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
 
     public function index(Request $request)
     {
-        // Default values
         $size = $request->query('size') ? $request->query('size') : 12;
         $o_column = '';
         $o_order = '';
@@ -22,7 +23,6 @@ class ShopController extends Controller
         $min_price = $request->query('min') ? $request->query('min') : 1;
         $max_price = $request->query('max') ? $request->query('max') : 50000;
 
-        // Set the sorting order based on the 'order' parameter
         switch ($order) {
             case 1:
                 $o_column = 'created_at';
@@ -45,14 +45,11 @@ class ShopController extends Controller
                 $o_order = 'DESC';
         }
 
-        // Fetch all brands and categories for the filters dropdown
         $brands = Brand::orderBy('name', 'ASC')->get();
         $categories = Category::orderBy('name', 'ASC')->get();
 
-        // Initialize the query for products
         $productsQuery = Product::query();
 
-        // Apply brand filter if brands are provided
         if ($f_brands) {
             $brandIds = explode(',', $f_brands);
             if (!empty($brandIds)) {
@@ -60,7 +57,6 @@ class ShopController extends Controller
             }
         }
 
-        // Apply category filter if categories are provided
         if ($f_categories) {
             $categoryIds = explode(',', $f_categories);
             if (!empty($categoryIds)) {
@@ -68,7 +64,6 @@ class ShopController extends Controller
             }
         }
 
-        // Apply price filter (sale_price OR regular_price)
         $productsQuery->where(function ($query) use ($min_price, $max_price) {
             $query->whereBetween('sale_price', [$min_price, $max_price])
                 ->orWhereBetween('regular_price', [$min_price, $max_price]);
@@ -85,10 +80,30 @@ class ShopController extends Controller
 
     public function product_details($product_slug)
     {
-
-
         $product = Product::where('slug', $product_slug)->first();
         $rproducts = Product::where('slug', '<>', $product_slug)->get()->take(8);
         return view('details', compact('product', 'rproducts'));
+    }
+
+    public function reviewStore(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'details' => 'nullable|string',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        // Create a new review instance
+        $review = new Review();
+        $review->product_id = $request->product_id;
+        $review->user_id = Auth::id(); // Authenticated user's ID
+        $review->details = $request->details;
+        $review->rating = $request->rating;
+        $review->save();
+
+        dd($review);
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Thank you for your review!');
     }
 }

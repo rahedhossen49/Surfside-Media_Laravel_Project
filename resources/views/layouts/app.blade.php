@@ -581,13 +581,13 @@
                 <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
                     <div class="logo">
                         <a href="{{ route('home.index') }}">
-                            <img src="{{ asset('assets/images/logo/logo.png') }}" alt="SurfsideMedia"
+                            <img src="{{ asset('assets/images/logo/logo.png') }}" alt="ShopTech"
                                 class="logo__image d-block" />
                         </a>
                     </div>
-                    <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-                    <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-                    <p><strong class="fw-medium">+1 000-000-0000</strong></p>
+                    <p class="footer-address">123 Beach Avenue,Tech Shop, CA 00000</p>
+                    <p class="m-0"><strong class="fw-medium">contact@rahedhossen.in</strong></p>
+                    <p><strong class="fw-medium">+8801975539231</strong></p>
 
                     <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
                         <li>
@@ -637,21 +637,42 @@
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Company</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About
+                        <li class="sub-menu__item"><a href="{{ route('home.about') }}"
+                                class="menu-link menu-link_us-s">About
                                 Us</a></li>
 
-                        <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact
+                        <li class="sub-menu__item"><a href="{{ route('home.contact') }}"
+                                class="menu-link menu-link_us-s">Contact
                                 Us</a></li>
                     </ul>
                 </div>
 
+                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                    <h6 class="sub-menu__title text-uppercase">SHOP</h6>
+                    <ul class="sub-menu__list list-unstyled">
+                        <li class="sub-menu__item"><a
+                                href="{{ url('/shop?page=1&size=12&order=1&brands=&categories=&min=1&max=50000') }}"
+                                class="menu-link menu-link_us-s">New Arrivals</a>
+                        </li>
+                        <li class="sub-menu__item"><a href="{{ url('/shop?categories=5') }}"
+                                class="menu-link menu-link_us-s">UPS</a></li>
+                        <li class="sub-menu__item"><a href="{{ url('/shop?categories=6') }}"
+                                class="menu-link menu-link_us-s">Printer</a></li>
+                        <li class="sub-menu__item"><a href="{{ url('/shop?categories=7') }}"
+                                class="menu-link menu-link_us-s">Speaker</a>
+                        </li>
+                        <li class="sub-menu__item"><a href="{{ route('shop.index') }}"
+                                class="menu-link menu-link_us-s">Shop All</a>
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Help</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer
                                 Service</a></li>
-                        <li class="sub-menu__item"><a href="account_dashboard.html"
+                        <li class="sub-menu__item"><a href="{{ route('user.user_account') }}"
                                 class="menu-link menu-link_us-s">My Account</a>
                         </li>
 
@@ -660,16 +681,22 @@
                     </ul>
                 </div>
 
+
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Categories</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Computer</a>
+                        <li class="sub-menu__item"><a href="{{ url('/shop?categories=1') }}"
+                                class="menu-link menu-link_us-s">Laptop</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Mobile</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Laptop</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Hard Disk</a>
+                        <li class="sub-menu__item"><a href="{{ url('/shop?categories=4') }}"
+                                class="menu-link menu-link_us-s">Desktop</a></li>
+                        <li class="sub-menu__item"><a href="{{ url('/shop?categories=8') }}"
+                                class="menu-link menu-link_us-s">Tablet PC</a></li>
+                        <li class="sub-menu__item"><a href="{{ url('/shop?categories=7') }}"
+                                class="menu-link menu-link_us-s">Camera</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a>
+                        <li class="sub-menu__item"><a href="{{ route('shop.index') }}"
+                                class="menu-link menu-link_us-s">Shop All</a>
                         </li>
                     </ul>
                 </div>
@@ -678,7 +705,7 @@
 
         <div class="footer-bottom">
             <div class="container d-md-flex align-items-center">
-                <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+                <span class="footer-copyright me-auto">©2024-2025 Tech Shop</span>
                 <div class="footer-settings d-md-flex align-items-center">
                     <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a
                         href="terms-conditions.html">Terms &amp;

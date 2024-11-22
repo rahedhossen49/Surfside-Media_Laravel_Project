@@ -23,6 +23,9 @@ Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_
 Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
 
+//! ratting
+Route::post('/shop/reviews', [ShopController::class, 'reviewStore'])->name('details.review.store');
+
 
 //! contact route
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');

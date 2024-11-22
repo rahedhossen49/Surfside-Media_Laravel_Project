@@ -43,10 +43,10 @@
                 <div class="section-menu-left">
                     <div class="box-logo">
                         <a href="{{ route('admin.index') }}" id="site-logo-inner">
-                            <img class="" id="logo_header" alt=""
-                                src="{{ asset('images/logo/logo.png') }}"
-                                data-light="{{ asset('images/logo/logo.png') }}"
-                                data-dark="{{ asset('images/logo/logo.png') }}">
+                            <img class="w-50 h-50" id="logo_header" alt=""
+                                src="{{ asset('assets/images/logo/logo.png') }}"
+                                data-light="{{ asset('assets/images/logo/logo.png') }}"
+                                data-dark="{{ asset('assets/images/logo/logo.png') }}">
                         </a>
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
@@ -171,12 +171,12 @@
                                     </a>
                                 </li>
 
-                                <li class="menu-item">
+                                {{-- <li class="menu-item">
                                     <a href="#" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="menu-item">
                                     <form action="{{ route('logout') }}" method="POST" id="logout-form">
                                         @csrf
