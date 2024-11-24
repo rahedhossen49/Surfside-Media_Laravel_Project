@@ -46,12 +46,12 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Image</th>
-                                {{-- <th>Tagline</th>
+                                <th>Tagline</th>
                                 <th>Title</th>
                                 <th>Subtitle</th>
-                                <th>Link</th> --}}
-                                <th>Edit</th>
+                                <th>Link</th>
                                 <th>Delete</th>
+                                {{-- <th>Edit</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -68,14 +68,15 @@
                                     <td>{{ $slide->title }}</td>
                                     <td>{{ $slide->subtitle }}</td>
                                     <td>{{ $slide->link }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <div class="list-icon-function">
                                             <a href="{{ route('admin.slide.edit', ['id' => $slide->id]) }}">
                                                 <div class="item edit">
                                                     <i class="icon-edit-3"></i>
                                                 </div>
                                             </a>
-                                    </td>
+                                        </div>
+                                    </td> --}}
                                     <td>
                                         <form action="{{ route('admin.slide.delete', ['id' => $slide->id]) }}"
                                             method="POST">

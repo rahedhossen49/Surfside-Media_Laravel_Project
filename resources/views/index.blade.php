@@ -17,9 +17,9 @@
                 @foreach ($slides as $slide)
                     <div class="swiper-slide">
                         <div class="overflow-hidden" id="banner-custom">
-                            <img loading="lazy" src="{{ asset('uploads/slides') }}/{{ $slide->image }}"
+                            <img width="1600" loading="lazy" src="{{ asset('uploads/slides') }}/{{ $slide->image }}"
                                 alt="{{ $slide->name }}"
-                                class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
+                                class="slideshow-character__img animate animate_fade animate_btt animate_delay-9" />
                         </div>
                     </div>
                 @endforeach
@@ -163,8 +163,8 @@
                 <div class="row">
                     <div
                         class="col-md-6 col-lg-4 col-xl-20per d-flex align-items-center flex-column justify-content-center py-4 align-items-md-start">
-                        <h2>Summer Sale</h2>
-                        <h2 class="fw-bold">Up to 60% Off</h2>
+                        <h2>Winter Sale</h2>
+                        <h2 class="fw-bold">Up to 40% Off</h2>
 
                         <div class="position-relative d-flex align-items-center text-center pt-xxl-4 js-countdown mb-3"
                             data-date="18-3-2024" data-time="06:50">

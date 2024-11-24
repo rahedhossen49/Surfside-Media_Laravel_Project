@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="surfside media" />
+    <meta name="author" content="Tech Shop" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animation.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
@@ -42,7 +42,7 @@
 
                 <div class="section-menu-left">
                     <div class="box-logo">
-                        <a href="{{ route('admin.index') }}" id="site-logo-inner">
+                        <a href="{{ route('home.index') }}" id="site-logo-inner">
                             <img class="w-50 h-50" id="logo_header" alt=""
                                 src="{{ asset('assets/images/logo/logo.png') }}"
                                 data-light="{{ asset('assets/images/logo/logo.png') }}"
@@ -52,6 +52,7 @@
                             <i class="icon-menu-left"></i>
                         </div>
                     </div>
+
                     <div class="center">
                         <div class="center-item">
                             <div class="center-heading">Main Home</div>
@@ -63,7 +64,9 @@
                                     </a>
                                 </li>
                             </ul>
+
                         </div>
+
                         <div class="center-item">
                             <ul class="menu-list">
                                 <li class="menu-item has-children">
@@ -372,7 +375,7 @@
                     <div class="main-content">
                         @yield('content')
                         <div class="bottom-page">
-                            <div class="body-text">Copyright © 2024 SurfsideMedia</div>
+                            <div class="body-text">Copyright © 2024-2025 Tech Shop</div>
                         </div>
                     </div>
 

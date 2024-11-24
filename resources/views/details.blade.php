@@ -9,6 +9,41 @@
         .filled-heart {
             color: orange;
         }
+
+        .star-rating {
+            margin: 5px 0px 0px 0px;
+            direction: rtl;
+            display: inline-block;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: gray;
+            font-size: 20px;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .star-rating input:checked~label {
+            color: gold;
+        }
+
+        .star-rating input:hover~label {
+            color: gold;
+        }
+
+        .star-rating input:checked+label:hover,
+        .star-rating input:checked+label:hover~label {
+            color: gold;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover~label {
+            color: gold;
+        }
     </style>
     <main class="pt-90">
         <div class="mb-md-1 pb-md-3"></div>
@@ -107,26 +142,36 @@
                         </div><!-- /.shop-acs --> -
                     </div> --}}
                     <h1 class="product-single__name">{{ $product->name }}</h1>
+
                     <div class="product-single__rating">
                         <div class="reviews-group d-flex">
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
-                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_star" />
-                            </svg>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= floor($product->averageRating))
+                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_star" />
+                                    </svg>
+                                @elseif ($i == ceil($product->averageRating) && $product->averageRating - floor($product->averageRating) >= 0.5)
+                                    <!-- Half star -->
+                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_half_star" />
+                                    </svg>
+                                @else
+                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_empty_star" />
+                                    </svg>
+                                @endif
+                            @endfor
                         </div>
-                        <span class="reviews-note text-lowercase text-secondary ms-1">reviews</span>
+
+                        <span class="reviews-note text-lowercase text-secondary ms-1">
+                            {{ number_format($product->averageRating, 1) }} / 5
+                        </span>
+
+                        <span class="reviews-count ms-2">
+                            ({{ count($reviews) }} reviews)
+                        </span>
                     </div>
+
                     <div class="product-single__price">
                         <span class="current-price">
                             @if ($product->sale_price)
@@ -305,47 +350,31 @@
                         <div class="product-single__reviews-list">
 
                             <div class="product-single__reviews-item">
-                                <div class="customer-avatar">
+                                {{-- <div class="customer-avatar">
                                     <img loading="lazy" src="assets/images/avatar.jpg" alt="" />
-                                </div>
+                                </div> --}}
                                 <div class="customer-review">
-                                    <div class="customer-name">
-                                        <h6>Benjam Porter</h6>
-                                        <div class="reviews-group d-flex">
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
+                                    @foreach ($reviews as $review)
+                                        <div class="customer-name">
+                                            <h6>{{ $review->user->name }}</h6>
+                                            <div class="reviews-group d-flex">
+                                                @for ($i = 1; $i <= $review->rating; $i++)
+                                                    <svg class="review-star" viewBox="0 0 9 9"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <use href="#icon_star" />
+                                                    </svg>
+                                                @endfor
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="review-date">April 06, 2023</div>
-                                    <div class="review-text">
-                                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                                            minus id quod
-                                            maxime placeat facere possimus, omnis voluptas assumenda est…</p>
-                                    </div>
+                                        <div class="review-date">
+                                            {{ (new \DateTime($review->created_at))->format('F j, Y') }}</div>
+                                        <div class="review-text">
+                                            <p>{{ $review->details }}</p>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-
-
-
 
                         <div class="product-single__review-form">
                             @if (Auth::check())
@@ -356,32 +385,31 @@
 
                                     <div class="select-star-rating">
 
-                                        <label>Your rating *</label>
+                                        <label>Your rating* </label>
 
-                                        <span class="star-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-
-                                        </span>
+                                        <div class="star-rating">
+                                            <input type="radio" name="rating" id="star5" value="5" />
+                                            <label for="star5">&#9733;</label>
+                                            <input type="radio" name="rating" id="star4" value="4" />
+                                            <label for="star4">&#9733;</label>
+                                            <input type="radio" name="rating" id="star3" value="3" />
+                                            <label for="star3">&#9733;</label>
+                                            <input type="radio" name="rating" id="star2" value="2" />
+                                            <label for="star2">&#9733;</label>
+                                            <input type="radio" name="rating" id="star1" value="1" />
+                                            <label for="star1">&#9733;</label>
+                                        </div>
                                     </div>
+
 
                                     <div class="mb-4">
                                         <textarea id="form-input-review" name="details" class="form-control form-control_gray" placeholder="Your Review"
                                             cols="30" rows="8"></textarea>
                                     </div>
 
-                                    <div class="form-label-fixed mb-4">
-                                        <label for="form-input-name" class="form-label">Name *</label>
-                                        <input id="form-input-name" name="name"
-                                            class="form-control form-control-md form-control_gray"
-                                            value="{{ Auth::user()->name }}" readonly>
-                                    </div>
-
-                                    <div class="form-label-fixed mb-4">
-                                        <label for="form-input-email" class="form-label">Email address *</label>
-                                        <input id="form-input-email" name="email"
-                                            class="form-control form-control-md form-control_gray"
-                                            value="{{ Auth::user()->email }}" readonly>
+                                    <div>
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                     </div>
 
                                     <div class="form-action">

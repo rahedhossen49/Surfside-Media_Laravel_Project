@@ -333,12 +333,16 @@
                 </a>
             </div>
 
-            <a href="#" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
+            <a href="{{ route('cart.index') }}" class="header-tools__item header-tools__cart js-open-aside"
+                data-aside="cartDrawer">
                 <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_cart" />
                 </svg>
-                <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
+                @if (Cart::instance('cart')->content()->count() > 0)
+                    <span
+                        class="cart-amount d-block position-absolute js-cart-items-count">{{ Cart::instance('cart')->content()->count() }}</span>
+                @endif
             </a>
         </div>
 
@@ -383,18 +387,36 @@
                         <li class="navigation__item">
                             <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
                         </li>
+                        @if (auth()->check())
+                            @if (auth()->user()->utype === 'ADM')
+                                <li class="navigation__item">
+                                    <a href="{{ route('admin.index') }}" class="navigation__link">Admin Dashboard</a>
+                                </li>
+                            @else
+                                <li class="navigation__item">
+                                    <a href="{{ route('user.user_account') }}" class="navigation__link">My
+                                        Profile</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="navigation__item">
+                                <a href="{{ route('login') }}" class="navigation__link">Login</a>
+                            </li>
+                        @endif
+
+
                     </ul>
                 </div>
             </div>
 
             <div class="border-top mt-auto pb-2">
-                <div class="customer-links container mt-4 mb-2 pb-1">
+                {{-- <div class="customer-links container mt-4 mb-2 pb-1">
                     <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_user" />
+                        <use href="{{ route('user.user_account') }}" />
                     </svg>
                     <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">My Account</span>
-                </div>
+                </div> --}}
 
 
 
@@ -748,7 +770,10 @@
                             xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_heart" />
                         </svg>
-                        <span class="wishlist-amount d-block position-absolute js-wishlist-count">3</span>
+                        @if (Cart::instance('wishlist')->content()->count() > 0)
+                            <span
+                                class="wishlist-amount d-block position-absolute js-wishlist-count">{{ Cart::instance('wishlist')->content()->count() }}</span>
+                        @endif
                     </div>
                     <span>Wishlist</span>
                 </a>
@@ -786,7 +811,7 @@
 
                                 var url =
                                     "{{ route('shop.product.details', ['product_slug' => 'product_slug']) }}";
-                                var link = url.replace(':product_slug', item.slug);
+                                var link = url.replace('product_slug', item.slug);
                                 $("#box-content-search").append(`
     <li>
         <ul>

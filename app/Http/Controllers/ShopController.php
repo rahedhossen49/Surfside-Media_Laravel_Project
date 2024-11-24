@@ -84,7 +84,16 @@ class ShopController extends Controller
             ->take(8)
             ->get();
 
-        return view('details', compact('product', 'rproducts'));
+        $reviews = Review::where('product_id', $product->id)
+            ->latest()
+            ->with('user')
+            ->get();
+
+        $averageRating = $reviews->isEmpty() ? 0 : $reviews->avg('rating');
+
+        $product->averageRating = $averageRating;
+
+        return view('details', compact('product', 'rproducts', 'reviews'));
     }
 
 
