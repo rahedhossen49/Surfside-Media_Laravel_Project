@@ -123,8 +123,6 @@ class ShopController extends Controller
         $review->rating = $request->rating;
         $review->save();
 
-        dd($review);
-        // Redirect back with a success message
         return redirect()->back()->with('success', 'Thank you for your review!');
     }
 }
