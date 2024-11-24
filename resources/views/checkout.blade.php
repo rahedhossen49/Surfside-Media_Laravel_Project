@@ -42,7 +42,7 @@
               </div>
             </div>
 
-            @if ($address)
+            {{-- @if ($address)
 
     <div class="row">
     <div class="col-md-12">
@@ -58,22 +58,23 @@
             </div>
         </div>
     </div>
-</div>
-                @else
+</div> --}}
+                {{-- @else --}}
 
             <div class="row mt-5">
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="name" required="" value="{{old('name')}}">
+                  <input type="text" class="form-control" name="name" required value="{{old('name')}}">
                   <label for="name">Full Name *</label>
                  @error('name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 </div>
               </div>
+              <input type="email" name="email" required hidden value="{{Auth::user()->email}}">
               <div class="col-md-6">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="phone" required="" value="{{old('phone')}}">
+                  <input type="text" class="form-control" name="phone" required value="{{old('phone')}}">
                   <label for="phone">Phone Number *</label>
                      @error('phone')
                 <span class="text-danger">{{$message}}</span>
@@ -82,16 +83,16 @@
               </div>
               <div class="col-md-4">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="zip" required="" value="{{old('zip')}}">
-                  <label for="zip">Pincode *</label>
-                     @error('zip')
+                  <input type="text" class="form-control" name="country" required value="{{old('country')}}">
+                  <label for="country">Country *</label>
+                     @error('country')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-floating mt-3 mb-3">
-                  <input type="text" class="form-control" name="state" required="" value="{{old('state')}}">
+                  <input type="text" class="form-control" name="state" required value="{{old('state')}}">
                   <label for="state">State *</label>
                      @error('state')
                 <span class="text-danger">{{$message}}</span>
@@ -100,14 +101,14 @@
               </div>
               <div class="col-md-4">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="city" required="" value="{{old('city')}}">
-                  <label for="city">Town / City *</label>
-                     @error('city')
+                  <input type="text" class="form-control" name="zip" required value="{{old('zip')}}">
+                  <label for="zip">Zip *</label>
+                     @error('zip')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 </div>
               </div>
-              <div class="col-md-6">
+              {{-- <div class="col-md-6">
                 <div class="form-floating my-3">
                   <input type="text" class="form-control" name="address" required="" value="{{old('address')}}">
                   <label for="address">House no, Building Name *</label>
@@ -124,18 +125,18 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 </div>
-              </div>
+              </div> --}}
               <div class="col-md-12">
                 <div class="form-floating my-3">
-                  <input type="text" class="form-control" name="landmark" required="" value="{{old('landmark')}}">
-                  <label for="landmark">Landmark *</label>
-                     @error('name')
+                  <input type="text" class="form-control" name="address" required value="{{old('address')}}">
+                  <label for="address">Address *</label>
+                     @error('address')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
                 </div>
               </div>
             </div>
-            @endif
+            {{-- @endif --}}
 
           </div>
           <div class="checkout__totals-wrapper">
@@ -218,7 +219,7 @@
               </div>
               <div class="checkout__payment-methods">
 
-                <div class="form-check">
+                {{-- <div class="form-check">
                   <input class="form-check-input form-check-input_fill" type="radio" name="mode" value="card"
                     id="mode1">
                   <label class="form-check-label" for="checkout_payment_method_2">
@@ -249,7 +250,8 @@
                       Nagad
 
                     </label>
-                  </div>
+                  </div> --}}
+                  
 
                 <div class="form-check">
                   <input class="form-check-input form-check-input_fill" type="radio" name="mode" value="cod"
@@ -257,6 +259,14 @@
                   <label class="form-check-label" for="mode5">
                     Cash on delivery
 
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input form-check-input_fill" type="radio" name="mode" value="online"
+                    id="mode6">
+                  <label class="form-check-label" for="mode6">
+                    Online Payment
                   </label>
                 </div>
 

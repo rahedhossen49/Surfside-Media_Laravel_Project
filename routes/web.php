@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Middleware\AuthAdmin;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Middleware\AuthAdmin;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
@@ -141,11 +141,9 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
 });
 
-
-
 // SSLCOMMERZ Start
 // Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
-// Route::get('/checkout', [SslCommerzPaymentController::class, 'Checkout'])->name('checkout');
+// Route::get('/checkout2', [SslCommerzPaymentController::class, 'Checkout'])->name('checkout');
 
 Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
 Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
@@ -155,5 +153,4 @@ Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
 Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
-
-//SSLCOMMERZ END
+//SSLCOMMERZ END
