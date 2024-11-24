@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2024 at 05:51 PM
+-- Generation Time: Nov 24, 2024 at 07:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,14 +32,10 @@ CREATE TABLE `addresses` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
-  `locality` varchar(255) NOT NULL,
-  `address` text NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
-  `landmark` varchar(255) DEFAULT NULL,
+  `state` varchar(255) NOT NULL,
   `zip` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL DEFAULT 'home',
+  `address` text NOT NULL,
   `isdefault` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -49,9 +45,9 @@ CREATE TABLE `addresses` (
 -- Dumping data for table `addresses`
 --
 
-INSERT INTO `addresses` (`id`, `user_id`, `name`, `phone`, `locality`, `address`, `city`, `state`, `country`, `landmark`, `zip`, `type`, `isdefault`, `created_at`, `updated_at`) VALUES
-(2, 3, 'Rahed Hossen', '01975539232', 'Byzid', 'chittagong', 'chittagong', 'chittagong', 'Bangladesh', 'Chittagong', '4000', 'home', 1, '2024-11-21 07:56:35', '2024-11-21 07:56:35'),
-(3, 1, 'Rahed Hossen', '01975539231', 'byezid', 'chittaggong', 'Chittagong', 'chittagong', 'Bangladesh', 'chittagong', '4000', 'home', 1, '2024-11-24 08:03:50', '2024-11-24 08:03:50');
+INSERT INTO `addresses` (`id`, `user_id`, `name`, `phone`, `country`, `state`, `zip`, `address`, `isdefault`, `created_at`, `updated_at`) VALUES
+(1, 3, 'Rakib Hossen', '01975539231', 'Bangladesh', 'chittagong', '4000', 'chittagong', 1, '2024-11-24 11:12:05', '2024-11-24 11:12:05'),
+(2, 4, 'Sazzad', '01234567891', 'Bangladesh', 'chittagong', '4000', 'chittagong', 1, '2024-11-24 11:29:56', '2024-11-24 11:29:56');
 
 -- --------------------------------------------------------
 
@@ -280,7 +276,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (35, '2024_11_15_144017_create_slides_table', 1),
 (36, '2024_11_15_193839_create_month_names_table', 1),
 (37, '2024_11_16_110555_create_contacts_table', 1),
-(38, '2024_11_21_125837_create_reviews_table', 2);
+(38, '2024_11_21_125837_create_reviews_table', 2),
+(39, '2024_11_24_170435_create_addresses_table', 3),
+(40, '2024_11_24_170503_create_transaction_table', 3),
+(41, '2024_11_24_171601_create_transactions_table', 4),
+(42, '2024_11_24_171649_create_transactions_table', 5);
 
 -- --------------------------------------------------------
 
@@ -342,6 +342,13 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `subtotal`, `discount`, `tax`, `total`, `name`, `phone`, `locality`, `address`, `city`, `state`, `country`, `landmark`, `zip`, `type`, `status`, `is_shipping_different`, `delivered_date`, `canceled_date`, `created_at`, `updated_at`) VALUES
+(12, 3, 36500.00, 0.00, 7665.00, 44165.00, 'Rakib Hossen', '01975539231', 'chittagong', 'chittagong', 'chittagong', 'chittagong', 'Bangladesh', 'chittagong', '4000', 'home', 'ordered', 0, NULL, NULL, '2024-11-24 12:04:25', '2024-11-24 12:04:25');
+
 -- --------------------------------------------------------
 
 --
@@ -359,6 +366,13 @@ CREATE TABLE `order_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `product_id`, `order_id`, `price`, `quantity`, `options`, `rstatus`, `created_at`, `updated_at`) VALUES
+(12, 1, 12, 36500.00, 1, NULL, 0, '2024-11-24 12:04:25', '2024-11-24 12:04:25');
 
 -- --------------------------------------------------------
 
@@ -482,8 +496,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('m2jVzGW1KfEU4r4dGH8hXGogH2VS8DsEeolXuEze', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUkF3N0FtMmhlZDdDcDhxdjFYUTYyMnZGVmNLN2Fad1hmcDVFWDBEaSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1732455304),
-('vcnNEFHDsieeOvQlVRNGuk8vST47M6FQTHfjeZ64', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoib2Zsbk5iVVNDazBwVjZaQU1NUjJoRTBtdW9JU21Qbkp1dEw3czdXRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzMyNDUzMDgwO31zOjQ6ImNhcnQiO2E6MDp7fX0=', 1732465037),
+('8H3gvRq8dVSVRaeoVAfCvn2yMmtbLnCgOR2SHlpT', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMmw3V2hKcW9hakFQWERWWmpiU1hmTDdaenA4TmRUWFI4RHg1TlpocyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jaGVja291dCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NDoiY2FydCI7YToxOntzOjQ6ImNhcnQiO086Mjk6IklsbHVtaW5hdGVcU3VwcG9ydFxDb2xsZWN0aW9uIjoyOntzOjg6IgAqAGl0ZW1zIjthOjE6e3M6MzI6IjAyN2M5MTM0MWZkNWNmNGQyNTc5YjQ5YzRiNmE5MGRhIjtPOjM1OiJTdXJmc2lkZW1lZGlhXFNob3BwaW5nY2FydFxDYXJ0SXRlbSI6OTp7czo1OiJyb3dJZCI7czozMjoiMDI3YzkxMzQxZmQ1Y2Y0ZDI1NzliNDljNGI2YTkwZGEiO3M6MjoiaWQiO3M6MToiMSI7czozOiJxdHkiO3M6MToiMSI7czo0OiJuYW1lIjtzOjEwMjoiTGVub3ZvIElkZWFQYWQgU2xpbSAxaSAxNElHTDcgSW50ZWwgQ0RDIE40MDIwIDhHQiBSQU0sIDI1NkdCIFNTRCAxNCBJbmNoIEZIRCBEaXNwbGF5IENsb3VkIEdyZXkgTGFwdG9wIjtzOjU6InByaWNlIjtkOjM2NTAwO3M6Nzoib3B0aW9ucyI7Tzo0MjoiU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW1PcHRpb25zIjoyOntzOjg6IgAqAGl0ZW1zIjthOjA6e31zOjI4OiIAKgBlc2NhcGVXaGVuQ2FzdGluZ1RvU3RyaW5nIjtiOjA7fXM6NTI6IgBTdXJmc2lkZW1lZGlhXFNob3BwaW5nY2FydFxDYXJ0SXRlbQBhc3NvY2lhdGVkTW9kZWwiO3M6MTg6IkFwcFxNb2RlbHNcUHJvZHVjdCI7czo0NDoiAFN1cmZzaWRlbWVkaWFcU2hvcHBpbmdjYXJ0XENhcnRJdGVtAHRheFJhdGUiO2k6MjE7czo0NDoiAFN1cmZzaWRlbWVkaWFcU2hvcHBpbmdjYXJ0XENhcnRJdGVtAGlzU2F2ZWQiO2I6MDt9fXM6Mjg6IgAqAGVzY2FwZVdoZW5DYXN0aW5nVG9TdHJpbmciO2I6MDt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzMyNDcxNDAzO319', 1732471411),
+('DklYlIAgjjXN0f6e4dosLVZoszGr6lED1G2i4Iqd', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiU09vbGZuS0diR25uZGk4OTNtMnNOaU1nbUlmeHNKMlpTd3NORWRPcSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi91c2VyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MzI0NjgyNTE7fX0=', 1732471341),
+('wTiNTMR6bid82tMpsQ512v7Tp5QxcvnlzvcnXazB', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiYms0OW4zTUZ6WGdXR1pRdVE0SjM3eG1QV3F1c050UnJ2SXppUmlJZSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NDoiY2FydCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6NDtzOjg6Im9yZGVyX2lkIjtpOjExO30=', 1732471361),
 ('yJPiIoBGfv8iVuOolgohzPbKQjjuZuMf3cOsZkvs', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiR3hKSEJDRlRKYUlUZlpXQ2xLVlA4bzZRVEdkbWFzM1N0MXpNQUFIRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9wcm9kdWN0L2FkZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzMyNDUzMjYyO31zOjQ6ImNhcnQiO2E6MTp7czo4OiJ3aXNobGlzdCI7TzoyOToiSWxsdW1pbmF0ZVxTdXBwb3J0XENvbGxlY3Rpb24iOjI6e3M6ODoiACoAaXRlbXMiO2E6MDp7fXM6Mjg6IgAqAGVzY2FwZVdoZW5DYXN0aW5nVG9TdHJpbmciO2I6MDt9fXM6ODoib3JkZXJfaWQiO2k6Mzt9', 1732467042);
 
 -- --------------------------------------------------------
@@ -522,11 +537,19 @@ CREATE TABLE `transactions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
-  `mode` enum('cod','card','paypal','bkash','nagad') NOT NULL,
+  `mode` varchar(255) NOT NULL,
+  `trans_id` varchar(255) NOT NULL,
   `status` enum('pending','approved','declined','refunded') NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `user_id`, `order_id`, `mode`, `trans_id`, `status`, `created_at`, `updated_at`) VALUES
+(7, 3, 12, 'online', '67436aa9c1592', 'pending', '2024-11-24 12:04:25', '2024-11-24 12:04:25');
 
 -- --------------------------------------------------------
 
@@ -553,7 +576,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `mobile`, `email_verified_at`, `password`, `utype`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Rahed Hossen', 'rahedhossen49@gmail.com', '01975539231', NULL, '$2y$12$a8AmAa91gnWZ2gX3YgeU2uiKpTETIKtOHt7nPNYETAtxJYK6FtI92', 'ADM', NULL, '2024-11-18 09:34:04', '2024-11-18 09:34:04'),
-(3, 'Rahed hossen', 'rahedhossen75@gmail.com', '01917558212', NULL, '$2y$12$39YVu23QPMOkIyHrrGFPfeY2NXesPfirSxnvYlYUZBVXp9jC.R6WG', 'USR', NULL, '2024-11-21 07:55:42', '2024-11-21 07:56:00');
+(3, 'Rahed hossen', 'rahedhossen75@gmail.com', '01917558212', NULL, '$2y$12$39YVu23QPMOkIyHrrGFPfeY2NXesPfirSxnvYlYUZBVXp9jC.R6WG', 'USR', NULL, '2024-11-21 07:55:42', '2024-11-21 07:56:00'),
+(4, 'Sazzad', 'sazzad@gmail.com', '01234567891', NULL, '$2y$12$3fT.f6KWf5NOCUPmWOwBFulZsXpeGopuxJ7KqciQJipq4i2ql9kge', 'USR', NULL, '2024-11-24 11:29:04', '2024-11-24 11:29:04');
 
 --
 -- Indexes for dumped tables
@@ -713,7 +737,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -755,7 +779,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `month_names`
@@ -767,13 +791,13 @@ ALTER TABLE `month_names`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -797,13 +821,13 @@ ALTER TABLE `slides`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
