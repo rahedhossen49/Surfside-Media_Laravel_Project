@@ -608,12 +608,16 @@
                         </a>
                     </div>
                     <p class="footer-address">123 Beach Avenue,Tech Shop, CA 00000</p>
-                    <p class="m-0"><strong class="fw-medium">contact@rahedhossen.in</strong></p>
+                    <p class="m-0">
+                        <a href="mailto:contact@rahedhossen.in" class="fw-medium">
+                            <strong>contact@rahedhossen49.in</strong>
+                        </a>
+                    </p>
                     <p><strong class="fw-medium">+8801975539231</strong></p>
 
                     <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
                         <li>
-                            <a href="#" class="footer__social-link d-block">
+                            <a href="https://www.facebook.com/rahedhossen4/" class="footer__social-link d-block">
                                 <svg class="svg-icon svg-icon_facebook" width="9" height="15"
                                     viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_facebook" />
@@ -621,7 +625,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="footer__social-link d-block">
+                            <a href="https://x.com/RahedHossen49" class="footer__social-link d-block">
                                 <svg class="svg-icon svg-icon_twitter" width="14" height="13"
                                     viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_twitter" />
@@ -629,7 +633,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="footer__social-link d-block">
+                            <a href="https://www.instagram.com/rahedhoseen49" class="footer__social-link d-block">
                                 <svg class="svg-icon svg-icon_instagram" width="14" height="13"
                                     viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_instagram" />
@@ -637,6 +641,30 @@
                             </a>
                         </li>
                         <li>
+                            <!-- GitHub -->
+                            <a href="https://github.com/rahedhossen49" target="_blank"
+                                class="footer__social-link d-block">
+                                <svg class="svg-icon svg-icon_github" width="16" height="16"
+                                    viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.2 1.87.86 2.33.66.07-.52.28-.86.51-1.06-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.13 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.94.29.25.54.74.54 1.49 0 1.08-.01 1.95-.01 2.22 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <!-- LinkedIn -->
+                            <a href="https://www.linkedin.com/in/rahed-hossen-393b41294/" target="_blank"
+                                class="footer__social-link d-block">
+                                <svg class="svg-icon svg-icon_linkedin" width="16" height="16"
+                                    viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.146 0A1.146 1.146 0 0 0 0 1.146v13.708C0 15.29.51 16 1.146 16h13.708A1.146 1.146 0 0 0 16 14.854V1.146A1.146 1.146 0 0 0 14.854 0H1.146zm4.375 13.645h-2.5V6.207h2.5v7.438zM2.897 5.052a1.457 1.457 0 1 1 0-2.914 1.457 1.457 0 0 1 0 2.914zm10.624 8.593h-2.5v-3.645c0-.871-.019-1.996-1.216-1.996-1.216 0-1.402.949-1.402 1.93v3.711h-2.5V6.207h2.404v1.023h.033c.334-.632 1.15-1.297 2.368-1.297 2.534 0 3.004 1.668 3.004 3.838v4.874z" />
+                                </svg>
+                            </a>
+                        </li>
+
+                        {{-- <li>
                             <a href="#" class="footer__social-link d-block">
                                 <svg class="svg-icon svg-icon_youtube" width="16" height="11"
                                     viewBox="0 0 16 11" xmlns="http://www.w3.org/2000/svg">
@@ -644,15 +672,15 @@
                                         d="M15.0117 1.8584C14.8477 1.20215 14.3281 0.682617 13.6992 0.518555C12.5234 0.19043 7.875 0.19043 7.875 0.19043C7.875 0.19043 3.19922 0.19043 2.02344 0.518555C1.39453 0.682617 0.875 1.20215 0.710938 1.8584C0.382812 3.00684 0.382812 5.46777 0.382812 5.46777C0.382812 5.46777 0.382812 7.90137 0.710938 9.07715C0.875 9.7334 1.39453 10.2256 2.02344 10.3896C3.19922 10.6904 7.875 10.6904 7.875 10.6904C7.875 10.6904 12.5234 10.6904 13.6992 10.3896C14.3281 10.2256 14.8477 9.7334 15.0117 9.07715C15.3398 7.90137 15.3398 5.46777 15.3398 5.46777C15.3398 5.46777 15.3398 3.00684 15.0117 1.8584ZM6.34375 7.68262V3.25293L10.2266 5.46777L6.34375 7.68262Z" />
                                 </svg>
                             </a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="#" class="footer__social-link d-block">
                                 <svg class="svg-icon svg-icon_pinterest" width="14" height="15"
                                     viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_pinterest" />
                                 </svg>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
 
@@ -729,8 +757,7 @@
             <div class="container d-md-flex align-items-center">
                 <span class="footer-copyright me-auto">©2024-2025 Tech Shop</span>
                 <div class="footer-settings d-md-flex align-items-center">
-                    <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a
-                        href="terms-conditions.html">Terms &amp;
+                    <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms &amp;
                         Conditions</a>
                 </div>
             </div>
