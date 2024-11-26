@@ -2,15 +2,15 @@
 
 @section('content')
 
-<style>
-    .text-success{
-        color: #278c04 !important;
-    }
+    <style>
+        .text-success {
+            color: #278c04 !important;
+        }
 
-    .text-danger{
-        color: red !important
-    }
-</style>
+        .text-danger {
+            color: red !important
+        }
+    </style>
 
     <main class="pt-90">
         <div class="mb-4 pb-4"></div>
@@ -73,17 +73,19 @@
                                         <div class="qty-control position-relative">
                                             <input type="number" name="quantity" value="{{ $item->qty }}" min="1"
                                                 class="qty-control__number text-center">
-                                                <form action="{{ route('cart.qty.decrease', ['rowId' => $item->rowId]) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="qty-control__reduce">-</div>
-                                                </form>
+                                            <form action="{{ route('cart.qty.decrease', ['rowId' => $item->rowId]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="qty-control__reduce">-</div>
+                                            </form>
 
-                                                <form action="{{ route('cart.qty.increase', ['rowId' => $item->rowId]) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="qty-control__increase">+</div>
-                                                </form>
+                                            <form action="{{ route('cart.qty.increase', ['rowId' => $item->rowId]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="qty-control__increase">+</div>
+                                            </form>
 
                                         </div>
                                     </td>
@@ -91,18 +93,19 @@
                                         <span class="shopping-cart__subtotal">Tk {{ $item->subTotal() }}</span>
                                     </td>
                                     <td>
-                                        <form action="{{route('cart.item.remove',['rowId'=>$item->rowId])}}" method="POSt">
-                                      @csrf
-                                      @method('DELETE')
-                                        <a href="javascript:void(0)" class="remove-cart">
-                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
-                                                <path
-                                                    d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
-                                            </svg>
-                                        </a>
+                                        <form action="{{ route('cart.item.remove', ['rowId' => $item->rowId]) }}"
+                                            method="POSt">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:void(0)" class="remove-cart">
+                                                <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
+                                                    <path
+                                                        d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
+                                                </svg>
+                                            </a>
                                         </form>
                                     </td>
                                 </tr>
@@ -114,25 +117,25 @@
                 <div class="cart-table-footer">
 
                     @if (!Session::has('coupon'))
-                    <form action="{{route('cart.coupon.apply')}}" method="POST" class="position-relative bg-body">
-                        @csrf
-                        <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value=""/>
-                        <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
-                            value="APPLY COUPON">
-                    </form>
+                        <form action="{{ route('cart.coupon.apply') }}" method="POST" class="position-relative bg-body">
+                            @csrf
+                            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code"
+                                value="" />
+                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
+                                value="APPLY COUPON">
+                        </form>
                     @else
-
-                    <form action="{{route('cart.coupon.remove')}}" method="POST" class="position-relative bg-body">
-                        @csrf
-                        @method('DELETE')
-                        <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value="@if(Session::has('coupon')) {{Session::get('coupon')['code']}} Applied! @endif "/>
-                        <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
-                            value="REMOVE COUPON">
-                    </form>
-
+                        <form action="{{ route('cart.coupon.remove') }}" method="POST" class="position-relative bg-body">
+                            @csrf
+                            @method('DELETE')
+                            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code"
+                                value="@if (Session::has('coupon')) {{ Session::get('coupon')['code'] }} Applied! @endif " />
+                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
+                                value="REMOVE COUPON">
+                        </form>
                     @endif
 
-                    <form action="{{route('cart.empty')}}" method="POST">
+                    <form action="{{ route('cart.empty') }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-light" type="submit">CLEAR CART</button>
@@ -140,11 +143,9 @@
                 </div>
                 <div>
                     @if (Session::has('success'))
-
-                    <p class="text-success">{{Session::get('success')}}</p>
-
+                        <p class="text-success">{{ Session::get('success') }}</p>
                     @elseif (Session::has('error'))
-                        <p class="text-danger">{{Session::get('error')}}</p>
+                        <p class="text-danger">{{ Session::get('error') }}</p>
                     @endif
                 </div>
             </div>
@@ -154,60 +155,61 @@
                         <h3>Cart Totals</h3>
 
                         @if (Session::has('discounts'))
-                        <table class="cart-totals">
-                            <tbody>
-                                <tr>
-                                    <th>Subtotal</th>
-                                    <td>Tk {{ Cart::instance('cart')->subtotal() }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Discount {{Session::get('coupon')['code']}}</th>
-                                    <td>Tk {{Session::get('discounts')['discount']}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Subtotal After Discount</th>
-                                    <td>Tk {{Session::get('discounts')['subtotal']}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Shipping</th>
-                                    <td>Free</td>
-                                </tr>
-                                <tr>
-                                    <th>VAT</th>
-                                    <td>Tk {{Session::get('discounts')['tax']}}k</td>
-                                </tr>
-                                <tr>
-                                    <th>Total</th>
-                                    <td>Tk {{Session::get('discounts')['total']}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="cart-totals">
+                                <tbody>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td>Tk {{ Cart::instance('cart')->subtotal() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Discount {{ Session::get('coupon')['code'] }}</th>
+                                        <td>Tk {{ Session::get('discounts')['discount'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Subtotal After Discount</th>
+                                        <td>Tk {{ Session::get('discounts')['subtotal'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Shipping</th>
+                                        <td>Free</td>
+                                    </tr>
+                                    <tr>
+                                        <th>VAT</th>
+                                        <td>Tk {{ Session::get('discounts')['tax'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td>Tk {{ Session::get('discounts')['total'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         @else
-                        <table class="cart-totals">
-                            <tbody>
-                                <tr>
-                                    <th>Subtotal</th>
-                                    <td>Tk {{ Cart::instance('cart')->subtotal() }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Shipping</th>
-                                    <td>Free</td>
-                                </tr>
-                                <tr>
-                                    <th>VAT</th>
-                                    <td>Tk {{ Cart::instance('cart')->tax() }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Total</th>
-                                    <td>Tk {{ Cart::instance('cart')->total() }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="cart-totals">
+                                <tbody>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td>Tk {{ Cart::instance('cart')->subtotal() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Shipping</th>
+                                        <td>Free</td>
+                                    </tr>
+                                    <tr>
+                                        <th>VAT</th>
+                                        <td>Tk {{ Cart::instance('cart')->tax() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td>Tk {{ Cart::instance('cart')->total() }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         @endif
                     </div>
                     <div class="mobile_fixed-btn_wrapper">
                         <div class="button-wrapper container">
-                            <a href="{{route('cart.checkout')}}" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
+                            <a href="{{ route('cart.checkout') }}" class="btn btn-primary btn-checkout">PROCEED TO
+                                CHECKOUT</a>
                         </div>
                     </div>
                 </div>
@@ -228,25 +230,21 @@
 
 
 @push('scripts')
+    <script>
+        $(function() {
 
-<script>
-     $(function(){
+            $(".qty-control__increase").on("click", function() {
+                $(this).closest('form').submit();
+            });
 
-        $(".qty-control__increase").on("click",function(){
-            $(this).closest('form').submit();
-        });
+            $('.qty-control__reduce').on("click", function() {
 
-        $('.qty-control__reduce').on("click",function(){
+                $(this).closest('form').submit();
+            });
 
-            $(this).closest('form').submit();
-        });
-
-        $('.remove-cart').on("click",function(){
-            $(this).closest('form').submit();
-        });
-     })
-
-
-</script>
-
+            $('.remove-cart').on("click", function() {
+                $(this).closest('form').submit();
+            });
+        })
+    </script>
 @endpush

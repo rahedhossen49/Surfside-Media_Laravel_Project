@@ -92,31 +92,48 @@ class CartController extends Controller
         }
     }
 
-
-
     public function calculateDiscount()
     {
         $discount = 0;
+
         if (Session::has('coupon')) {
-            if (Session::get('coupon')['type'] == 'fixed') {  // Corrected typo here
-                $discount = Session::get('coupon')['value'];
-            } else {
-                $discount = (Cart::instance('cart')->subtotal() * Session::get('coupon')['value']) / 100;
+            // Get the coupon data
+            $coupon = Session::get('coupon');
+
+            // Validate the coupon value type
+            if (!is_numeric($coupon['value'])) {
+                return back()->with('error', 'Invalid coupon value');
             }
 
-            $subtotalAfterDiscount = Cart::instance('cart')->subtotal() - $discount;
+            // Get the subtotal and ensure it's numeric
+            $subtotal = floatval(Cart::instance('cart')->subtotal());
+
+            // Calculate discount based on coupon type
+            if ($coupon['type'] == 'fixed') {
+                $discount = $coupon['value'];  // Fixed discount
+            } else {
+                // Percentage discount calculation
+                $discount = ($subtotal * $coupon['value']) / 100;
+            }
+
+            // Apply discount to the subtotal
+            $subtotalAfterDiscount = $subtotal - $discount;
+
+            // Calculate tax after applying the discount
             $taxAfterDiscount = ($subtotalAfterDiscount * config('cart.tax')) / 100;
+
+            // Calculate total after applying the discount and tax
             $totalAfterDiscount = $subtotalAfterDiscount + $taxAfterDiscount;
 
+            // Save discount, subtotal, tax, and total values into session with formatted values
             Session::put('discounts', [
-                'discount' => number_format(floatval($discount), 2, '.', ''),
-                'subtotal' => number_format(floatval($subtotalAfterDiscount), 2, '.', ''),
-                'tax' => number_format(floatval($taxAfterDiscount), 2, '.', ''),
-                'total' => number_format(floatval($totalAfterDiscount), 2, '.', ''),
+                'discount' => number_format($discount, 2, '.', ''),
+                'subtotal' => number_format($subtotalAfterDiscount, 2, '.', ''),
+                'tax' => number_format($taxAfterDiscount, 2, '.', ''),
+                'total' => number_format($totalAfterDiscount, 2, '.', ''),
             ]);
         }
     }
-
 
 
     public function remove_coupon_code()
