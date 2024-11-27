@@ -312,6 +312,13 @@
             position: absolute;
             top: 120px;
         }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 70px;
+            right: 15px;
+            z-index: 1000;
+        }
     </style>
 
 
@@ -809,7 +816,12 @@
     </footer>
 
     {{--  Start This Work --}}
-    <div id="scrollTop" class="visually-hidden end-0"></div>
+    <div class="floating-whatsapp">
+        <a aria-label="Chat on WhatsApp" href="https://wa.me/+8801975539231">
+            <img src="{{ asset('assets/images/whatsapp.png') }}" width="50" height="50" alt="whatsapp">
+        </a>
+    </div>
+    <div id="scrollTop" class="visually-hidden end-0 m-3"></div>
     <div class="page-overlay"></div>
 
 

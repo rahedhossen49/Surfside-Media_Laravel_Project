@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 05:32 AM
+-- Generation Time: Nov 27, 2024 at 04:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerce_project`
+-- Database: `tech_shop`
 --
 
 -- --------------------------------------------------------
@@ -47,7 +47,9 @@ CREATE TABLE `addresses` (
 
 INSERT INTO `addresses` (`id`, `user_id`, `name`, `phone`, `country`, `state`, `zip`, `address`, `isdefault`, `created_at`, `updated_at`) VALUES
 (1, 3, 'Rakib Hossen', '01975539231', 'Bangladesh', 'chittagong', '4000', 'chittagong', 1, '2024-11-24 11:12:05', '2024-11-24 11:12:05'),
-(2, 4, 'Sazzad', '01234567891', 'Bangladesh', 'chittagong', '4000', 'chittagong', 1, '2024-11-24 11:29:56', '2024-11-24 11:29:56');
+(2, 4, 'Sazzad', '01234567891', 'Bangladesh', 'chittagong', '4000', 'chittagong', 1, '2024-11-24 11:29:56', '2024-11-24 11:29:56'),
+(3, 5, 'Kolixa', '01845363535', 'Bangladesh', 'chittagong', '4000', 'chittagong', 1, '2024-11-27 08:23:37', '2024-11-27 08:23:37'),
+(4, 5, 'Monira', '01915678341', 'london', 'chittagong', '4000', 'chittagong', 1, '2024-11-27 08:59:10', '2024-11-27 08:59:10');
 
 -- --------------------------------------------------------
 
@@ -191,8 +193,8 @@ CREATE TABLE `coupons` (
 --
 
 INSERT INTO `coupons` (`id`, `code`, `type`, `value`, `cart_value`, `expiry_date`, `created_at`, `updated_at`) VALUES
-(1, 'WNR11', 'fixed', 500.00, 2.00, '2025-02-01', '2024-11-24 08:11:53', '2024-11-24 08:11:53'),
-(2, 'WNR10', 'percent', 500.00, 2.00, '2025-02-01', '2024-11-24 08:12:36', '2024-11-24 08:12:36');
+(3, 'OFF200', 'fixed', 500.00, 1000.00, '2025-01-31', '2024-11-27 07:24:24', '2024-11-27 07:24:24'),
+(4, 'WTR10', 'percent', 10.00, 1000.00, '2025-01-31', '2024-11-27 07:25:28', '2024-11-27 07:25:28');
 
 -- --------------------------------------------------------
 
@@ -347,8 +349,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `subtotal`, `discount`, `tax`, `total`, `name`, `phone`, `locality`, `address`, `city`, `state`, `country`, `landmark`, `zip`, `type`, `status`, `is_shipping_different`, `delivered_date`, `canceled_date`, `created_at`, `updated_at`) VALUES
-(18, 3, 44590.00, 0.00, 9363.90, 53953.90, 'Rakib Hossen', '01975539231', 'chittagong', 'chittagong', 'chittagong', 'chittagong', 'Bangladesh', 'chittagong', '4000', 'home', 'ordered', 0, NULL, NULL, '2024-11-24 21:52:56', '2024-11-24 21:52:56'),
-(19, 3, 44590.00, 0.00, 9363.90, 53953.90, 'Rakib Hossen', '01975539231', 'chittagong', 'chittagong', 'chittagong', 'chittagong', 'Bangladesh', 'chittagong', '4000', 'home', 'ordered', 0, NULL, NULL, '2024-11-24 22:02:30', '2024-11-24 22:02:30');
+(21, 3, 8200.00, 0.00, 1722.00, 9922.00, 'Rakib Hossen', '01975539231', 'chittagong', 'chittagong', 'chittagong', 'chittagong', 'Bangladesh', 'chittagong', '4000', 'home', 'delivered', 0, '2024-11-26', NULL, '2024-11-26 09:38:40', '2024-11-26 09:40:55'),
+(22, 3, 1000.00, 0.00, 210.00, 1210.00, 'Rakib Hossen', '01975539231', 'chittagong', 'chittagong', 'chittagong', 'chittagong', 'Bangladesh', 'chittagong', '4000', 'home', 'ordered', 0, NULL, NULL, '2024-11-26 09:42:14', '2024-11-26 09:42:14'),
+(23, 3, 1163.20, 500.00, 46.53, 1209.73, 'Rakib Hossen', '01975539231', 'chittagong', 'chittagong', 'chittagong', 'chittagong', 'Bangladesh', 'chittagong', '4000', 'home', 'ordered', 0, NULL, NULL, '2024-11-27 08:18:09', '2024-11-27 08:18:09');
 
 -- --------------------------------------------------------
 
@@ -373,8 +376,9 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `product_id`, `order_id`, `price`, `quantity`, `options`, `rstatus`, `created_at`, `updated_at`) VALUES
-(18, 43, 18, 44590.00, 1, NULL, 0, '2024-11-24 21:52:56', '2024-11-24 21:52:56'),
-(19, 43, 19, 44590.00, 1, NULL, 0, '2024-11-24 22:02:30', '2024-11-24 22:02:30');
+(21, 39, 21, 8200.00, 1, NULL, 0, '2024-11-26 09:38:40', '2024-11-26 09:38:40'),
+(22, 57, 22, 1000.00, 1, NULL, 0, '2024-11-26 09:42:14', '2024-11-26 09:42:14'),
+(23, 60, 23, 277.20, 6, NULL, 0, '2024-11-27 08:18:09', '2024-11-27 08:18:09');
 
 -- --------------------------------------------------------
 
@@ -460,7 +464,8 @@ INSERT INTO `products` (`id`, `name`, `slug`, `short_description`, `description`
 (56, 'Awei T71 True Wireless Earbuds', 'awei-t71-true-wireless-earbuds', 'Model: T71\r\nDriver: 13mm\r\nBattery Capacity: 180mAh\r\nPlay Time: Up to 6H\r\nComfortably Wear', 'Awei T71 True Wireless Earbuds\r\nThe Awei T71 True Wireless Earbuds are intended for those who respect both performance and aesthetics. These T71 earbuds are both practical and stylish, with sleek color options like as Warm White for a fresh, modern look and Quiet Black for a more classic, modest design. Powered by Bluetooth 5.3, they provide a quick and robust connection, reducing latency and delivering smooth audio whether you\'re listening to music or making calls. The 13mm moving coil drivers of T71 produce dynamic sound with strong bass, precise mids, and clean treble, ideal for an immersive music experience. Each earbud has a 30mAh battery, allowing you up to 6 hours of continuous music playing and 5 hours of call time on a single charge. The charging case of Awei T71, which includes a 180mAh battery, facilitates quick recharges, ensuring that your earbuds are always ready to go. With a rapid 1-hour charging time, you can recharge during breaks, and the outstanding 300-hour standby period ensures they are available when you need them. With intuitive touch controls, the Awei T71 lets you easily handle your calls, music, and volume with a single tap, giving you total control without having to reach for your phone. The lightweight air-sense wear design guarantees a comfortable fit, so you may wear them for extended periods of time without discomfort. Whether for business, relaxation, or exercise, the Awei T71 True Wireless Earbuds provide a superior listening experience by merging style, comfort, and cutting-edge technologies in a small and adaptable packaging.', 1050.00, 940.00, 'W-A', 'instock', 1, 3, '1732459756.webp', '', 15, 26, '2024-11-24 08:49:16', '2024-11-24 08:49:16'),
 (57, 'Awei T62 ENC True Wireless Earbuds', 'awei-t62-enc-true-wireless-earbuds', 'Model: T62\r\nDriver: 6mm\r\nBattery Capacity: 500mAh\r\nPlay Time: Up to 3.5H\r\nFrequency Response Range: 20-20000Hz', 'Awei T62 ENC True Wireless Earbuds\r\nThe Awei T62 ENC True Wireless Earbuds are an impressive combination of cutting-edge technology and stylish design, suitable for both audiophiles and casual listeners. With a sophisticated Bluetooth 5.3 chip, these earbuds provide speedy pairing and a robust connection, allowing for uninterrupted music streaming and clear phone conversations. Each earbud of T62 has twin 10mm drivers that produce exceptional sound quality with powerful bass, crystal-clear mids, and dazzling highs, giving you an immersive audio experience whether you\'re listening to music or conversing with others. With a small 30mAh battery in each earbud, you can get up to 5 hours of playing on a single charge, making them ideal for lengthy journeys, workouts, or relaxing at home. Furthermore, the charging case has a capacity of 300mAh, offers multiple recharges, extending your listening time without the need to plug in frequently. The T62 earbuds also enable up to 4.5 hours of talk time, making them ideal for hands-free calls. The Awei T62 is built for ease, with a 1.5-hour charge period that keeps you connected to your music at all times. The earphones\' ergonomic shape offers a comfortable fit for longer use, and their lightweight construction makes them simple to carry in your pocket or backpack. These T62 earbuds, which include Environmental Noise Cancellation (ENC) technology, efficiently reduce background noise, ensuring that your voice is heard clearly during calls even in busy locations. Whether you\'re at the gym, commuting, or resting at home, the Awei T62 ENC True Wireless Earbuds provide a combination of design, comfort, and exceptional sound quality, making them an indispensable item for your audio needs.', 1100.00, 1000.00, 'W-AS', 'instock', 0, 2, '1732459843.webp', '', 15, 26, '2024-11-24 08:50:43', '2024-11-24 08:50:43'),
 (58, 'HJ78 RC Pro Duel 4K Camera Toy Drone', 'hj78-rc-pro-duel-4k-camera-toy-drone', 'Model: S70 Pro\r\nFoldable and Durable Design\r\n6-Axis Gyro for Easy Control\r\nBattery: 3.7V 600mah\r\nDistance: Up to 100 Meter', 'The HJ78 RC  Duel 4K Camera Toy Drone is an excellent drone that allows you to take spectacular 4K videos and photographs from the sky. Because it is intended for novices, you may easily manage it with the remote or your smartphone over Wi-Fi. It also features a gesture mode where you can control it with your hand gestures. The S70 Pro Duel 4K Camera Toy Drone is equipped with a robust battery that can provide up to 15 minutes of flight time. It features a battery capacity of 600 milliamp hours and a lithium ion battery cell composition. It also contains a low battery warning that alerts you when the power is running low, allowing you to securely land the drone. The dual camera technology on the S70 Pro Duel 4K Camera Toy Drone allows you to swap between front and bottom views, giving you multiple perspectives and angles. You may also manually adjust the camera angle and zoom in and out using the remote control. The drone accepts SD cards up to 128GB in size, allowing you to store a large number of films and photographs. The S70 Pro Duel Camera Toy Drone is a lightweight, foldable drone that is easy to transport. When unfolded, it is 28 x 23 x 5cm, and when folded, it measures 12 x 7 x 5cm. It weights only 240g and is suited for both children and adults. The drone also features a bright LED light that illuminates it in the dark.', 6600.00, 6000.00, 'D-S', 'instock', 1, 2, '1732460341.webp', '', 16, 29, '2024-11-24 08:59:02', '2024-11-24 08:59:02'),
-(59, 'A9002 4K HD Camera Toy Drone', 'a9002-4k-hd-camera-toy-drone', 'Model: A9002\r\nFoldable design, easy to carry\r\nTop Speed: Up to 25 meters\r\nG-type smart sensors\r\nDistance: Up to 230 Feet', 'A9002 4K HD Camera Toy Drone\r\nThe A9002 4K HD Camera Toy Drone comes equipped with a 4K camera and a real-time video transmitter, allowing you to capture breathtaking aerial footage. It has a 20-minute flight time and a quick charging time of about 55 minutes. The drone has a 1800mAh lithium battery and can travel at speeds of up to 25 meters per second. The drone provides precise and agile flight control thanks to its G-type smart sensors and all-side movement capability. For added convenience, the A9002 Toy Drone has a control distance of up to 230 meters and includes a low battery signal and an auto return button. The A9002 drone is also equipped with WiFi and 2.4GHz remote control connectivity. It is a beginner-friendly drone and comes with extra features like propeller guards and a high-quality carrying case.', 6500.00, 5500.00, 'D-C', 'instock', 0, 2, '1732460458.webp', '', 16, 28, '2024-11-24 09:00:58', '2024-11-24 09:00:58');
+(59, 'A9002 4K HD Camera Toy Drone', 'a9002-4k-hd-camera-toy-drone', 'Model: A9002\r\nFoldable design, easy to carry\r\nTop Speed: Up to 25 meters\r\nG-type smart sensors\r\nDistance: Up to 230 Feet', 'A9002 4K HD Camera Toy Drone\r\nThe A9002 4K HD Camera Toy Drone comes equipped with a 4K camera and a real-time video transmitter, allowing you to capture breathtaking aerial footage. It has a 20-minute flight time and a quick charging time of about 55 minutes. The drone has a 1800mAh lithium battery and can travel at speeds of up to 25 meters per second. The drone provides precise and agile flight control thanks to its G-type smart sensors and all-side movement capability. For added convenience, the A9002 Toy Drone has a control distance of up to 230 meters and includes a low battery signal and an auto return button. The A9002 drone is also equipped with WiFi and 2.4GHz remote control connectivity. It is a beginner-friendly drone and comes with extra features like propeller guards and a high-quality carrying case.', 6500.00, 5500.00, 'D-C', 'instock', 0, 2, '1732460458.webp', '', 16, 28, '2024-11-24 09:00:58', '2024-11-24 09:00:58'),
+(60, 'Yison CX620 In-Ear Wired Earphone', 'yison-cx620-in-ear-wired-earphone', 'Model: CX620\r\nDrive Unit: 10mm\r\nImpedance: 16Ω±15%\r\nCable length: 1.2m\r\nPlug Type: 3.5mm', 'Yison CX620 In-Ear Wired Earphone\r\nThe Yison CX620 In-Ear Wired Earphone are designed to deliver clear and balanced sound with a 10mm drive unit and a sensitivity of 90dB±3dB. The earphone have a 16Ω±15% impedance and a frequency response of 20-20KHz, which ensure a smooth and dynamic performance. The Yison CX620 In-Ear Wired Earphone come with a φ3.5mm plug that is compatible with most devices and a 1.2m cable that is tangle-free and durable. The earphone also have a sleek and lightweight design that fits snugly in your ears and reduces external noise. The Yison CX620 In-Ear Wired Earphone are ideal for music lovers who want to enjoy high-quality sound on the go.', 308.00, 277.20, 'E-H', 'instock', 0, 2, '1732713260.webp', '', 11, 24, '2024-11-27 07:14:23', '2024-11-27 07:14:23');
 
 -- --------------------------------------------------------
 
@@ -477,6 +482,13 @@ CREATE TABLE `reviews` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `product_id`, `user_id`, `details`, `rating`, `created_at`, `updated_at`) VALUES
+(2, 60, 3, 'Nice', 2, '2024-11-27 08:01:56', '2024-11-27 08:01:56');
 
 -- --------------------------------------------------------
 
@@ -498,10 +510,10 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('3OILibZEBUUyEGgRKKgXhFltXnCUNXQkRwEJlg0F', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiSm5HemFDQVBrc1dXQzQxbEh6N0JOc1NnRmZBNDhiOVJvM0hLbndRRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jaGVja291dCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzMyNTA1MTQ5O31zOjQ6ImNhcnQiO2E6MTp7czo0OiJjYXJ0IjtPOjI5OiJJbGx1bWluYXRlXFN1cHBvcnRcQ29sbGVjdGlvbiI6Mjp7czo4OiIAKgBpdGVtcyI7YToxOntzOjMyOiIyYzUwOTNlZDg1YjFkY2VjMDViNzIwNWJlYTBlNWVjNiI7TzozNToiU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0iOjk6e3M6NToicm93SWQiO3M6MzI6IjJjNTA5M2VkODViMWRjZWMwNWI3MjA1YmVhMGU1ZWM2IjtzOjI6ImlkIjtzOjI6IjMxIjtzOjM6InF0eSI7czoxOiIxIjtzOjQ6Im5hbWUiO3M6OTQ6Ikxlbm92byBUQUIgTTkgTFRFIE1lZGlhVGVrIEhlbGlvIEc4MCA0R0IgUkFNIDkgaW5jaCBIRCBJUFMgRGlzcGxheSBBcmN0aWMgR3JleSBUYWJsZXQgI1RCMzEwWFUiO3M6NToicHJpY2UiO2Q6MjQwMDA7czo3OiJvcHRpb25zIjtPOjQyOiJTdXJmc2lkZW1lZGlhXFNob3BwaW5nY2FydFxDYXJ0SXRlbU9wdGlvbnMiOjI6e3M6ODoiACoAaXRlbXMiO2E6MDp7fXM6Mjg6IgAqAGVzY2FwZVdoZW5DYXN0aW5nVG9TdHJpbmciO2I6MDt9czo1MjoiAFN1cmZzaWRlbWVkaWFcU2hvcHBpbmdjYXJ0XENhcnRJdGVtAGFzc29jaWF0ZWRNb2RlbCI7czoxODoiQXBwXE1vZGVsc1xQcm9kdWN0IjtzOjQ0OiIAU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AdGF4UmF0ZSI7aToyMTtzOjQ0OiIAU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AaXNTYXZlZCI7YjowO319czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO319fQ==', 1732505163),
-('deV3sSHRtbvUfXaelPxvpZJ3DJd9L20EA7tl2VTm', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUXg2WUZyN2traE01VTA1bWRBQmxPemRBdTNCdXdNdFBxa0ozRTUyayI7czo4OiJvcmRlcl9pZCI7aToxOTtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTozO3M6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvb3JkZXItY29uZmlybWF0aW9uIjt9fQ==', 1732507362),
-('MLbN5tePItIzSh5QVPZRKOgOEbhRz9QSuwjtRxYl', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNEM3Z1VRNVJoTThjRm90MmptNmRMM3NQdzRVdm9Rc0hOVWpOMUtVUCI7czo4OiJvcmRlcl9pZCI7aToxNDtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTozO3M6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tvdXQiO31zOjQ6ImNhcnQiO2E6MTp7czo0OiJjYXJ0IjtPOjI5OiJJbGx1bWluYXRlXFN1cHBvcnRcQ29sbGVjdGlvbiI6Mjp7czo4OiIAKgBpdGVtcyI7YToxOntzOjMyOiJlZmQwM2FhNWE0NzE1MjMzMGE4OWVhZGI5YjA5ZmU1MiI7TzozNToiU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0iOjk6e3M6NToicm93SWQiO3M6MzI6ImVmZDAzYWE1YTQ3MTUyMzMwYTg5ZWFkYjliMDlmZTUyIjtzOjI6ImlkIjtzOjI6IjI5IjtzOjM6InF0eSI7czoxOiIxIjtzOjQ6Im5hbWUiO3M6MTE3OiJYaWFvbWkgUmVkbWkgUGFkIFBybyAoV2lmaSkgU25hcGRyYWdvbiA3cyBHZW4gMiBPY3RhLWNvcmUgUHJvY2Vzc29yIDhHQiBSQU0gMTIuMSBJbmNoIDJLIERpc3BsYXkgR3JhcGhpdGUgR3JheSBUYWJsZXQiO3M6NToicHJpY2UiO2Q6NDMwMDA7czo3OiJvcHRpb25zIjtPOjQyOiJTdXJmc2lkZW1lZGlhXFNob3BwaW5nY2FydFxDYXJ0SXRlbU9wdGlvbnMiOjI6e3M6ODoiACoAaXRlbXMiO2E6MDp7fXM6Mjg6IgAqAGVzY2FwZVdoZW5DYXN0aW5nVG9TdHJpbmciO2I6MDt9czo1MjoiAFN1cmZzaWRlbWVkaWFcU2hvcHBpbmdjYXJ0XENhcnRJdGVtAGFzc29jaWF0ZWRNb2RlbCI7czoxODoiQXBwXE1vZGVsc1xQcm9kdWN0IjtzOjQ0OiIAU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AdGF4UmF0ZSI7aToyMTtzOjQ0OiIAU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AaXNTYXZlZCI7YjowO319czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO319fQ==', 1732505990),
-('XY1FFy7hhPf4aZdNAtggqmdPqVydZb8w7spS3nPR', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTHVZTFdoelFzTFZJQWJWeEN0R0JLcDFjOGlvU1ZLUDFyWGV2eFpYWiI7czo4OiJvcmRlcl9pZCI7aToxNztzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTozO3M6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tvdXQiO31zOjQ6ImNhcnQiO2E6MTp7czo0OiJjYXJ0IjtPOjI5OiJJbGx1bWluYXRlXFN1cHBvcnRcQ29sbGVjdGlvbiI6Mjp7czo4OiIAKgBpdGVtcyI7YToxOntzOjMyOiIxY2EzMGQ3MGFiMDkxODdkZWYwZjc5MTIwZjE2MDdlZSI7TzozNToiU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0iOjk6e3M6NToicm93SWQiO3M6MzI6IjFjYTMwZDcwYWIwOTE4N2RlZjBmNzkxMjBmMTYwN2VlIjtzOjI6ImlkIjtzOjI6IjQzIjtzOjM6InF0eSI7czoxOiIxIjtzOjQ6Im5hbWUiO3M6Mzc6IkFwcGxlIFdhdGNoIFNlcmllcyA5IDQ1bW0gU21hcnQgV2F0Y2giO3M6NToicHJpY2UiO2Q6NDQ1OTA7czo3OiJvcHRpb25zIjtPOjQyOiJTdXJmc2lkZW1lZGlhXFNob3BwaW5nY2FydFxDYXJ0SXRlbU9wdGlvbnMiOjI6e3M6ODoiACoAaXRlbXMiO2E6MDp7fXM6Mjg6IgAqAGVzY2FwZVdoZW5DYXN0aW5nVG9TdHJpbmciO2I6MDt9czo1MjoiAFN1cmZzaWRlbWVkaWFcU2hvcHBpbmdjYXJ0XENhcnRJdGVtAGFzc29jaWF0ZWRNb2RlbCI7czoxODoiQXBwXE1vZGVsc1xQcm9kdWN0IjtzOjQ0OiIAU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AdGF4UmF0ZSI7aToyMTtzOjQ0OiIAU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AaXNTYXZlZCI7YjowO319czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO319fQ==', 1732507344);
+('HkSKJFmtXKDYwgyiVzuhee2HQTTnK28rriNwBkdy', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYzl0bkhnZkh5OGRSNm5DMEZEbWxhNDlnWHFjb2ZsYk9zQ1d4c3dkQyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYXJ0Ijt9czo0OiJjYXJ0IjthOjA6e319', 1732721294),
+('MXENk6xX2eMIdtrbjV7EB44RF5ZDDoGO6ZN3LEKU', 5, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUmtPVFowM0d5RnE2VFBsOGFrdEc0VEpHZXFoZzl2aWp4R1Bxc2tndiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jaGVja291dCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NDoiY2FydCI7YToxOntzOjQ6ImNhcnQiO086Mjk6IklsbHVtaW5hdGVcU3VwcG9ydFxDb2xsZWN0aW9uIjoyOntzOjg6IgAqAGl0ZW1zIjthOjE6e3M6MzI6IjYyMGQ2NzBkOTVmMDQxOWUzNWY5MTgyNjk1OTE4YzY4IjtPOjM1OiJTdXJmc2lkZW1lZGlhXFNob3BwaW5nY2FydFxDYXJ0SXRlbSI6OTp7czo1OiJyb3dJZCI7czozMjoiNjIwZDY3MGQ5NWYwNDE5ZTM1ZjkxODI2OTU5MThjNjgiO3M6MjoiaWQiO3M6MjoiMTEiO3M6MzoicXR5IjtzOjE6IjEiO3M6NDoibmFtZSI7czo0NzoiV2ludGVjaCBQcm8gQm94IFYyIEJLIE1pbmkgVG93ZXIgRGVza3RvcCBDYXNpbmciO3M6NToicHJpY2UiO2Q6MTAwMDtzOjc6Im9wdGlvbnMiO086NDI6IlN1cmZzaWRlbWVkaWFcU2hvcHBpbmdjYXJ0XENhcnRJdGVtT3B0aW9ucyI6Mjp7czo4OiIAKgBpdGVtcyI7YTowOnt9czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO31zOjUyOiIAU3VyZnNpZGVtZWRpYVxTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AYXNzb2NpYXRlZE1vZGVsIjtzOjE4OiJBcHBcTW9kZWxzXFByb2R1Y3QiO3M6NDQ6IgBTdXJmc2lkZW1lZGlhXFNob3BwaW5nY2FydFxDYXJ0SXRlbQB0YXhSYXRlIjtpOjQ7czo0NDoiAFN1cmZzaWRlbWVkaWFcU2hvcHBpbmdjYXJ0XENhcnRJdGVtAGlzU2F2ZWQiO2I6MDt9fXM6Mjg6IgAqAGVzY2FwZVdoZW5DYXN0aW5nVG9TdHJpbmciO2I6MDt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjU7fQ==', 1732717364),
+('xGrkEW4UHhw0Aokp8twTlg04U0ulR4M5LEymGrhE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTjR5dmg2T2kxeElMajlJV2k4cTlUdEpBSTJ5Q3ZKU2R5enZGaFEzdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9vcmRlcnMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NDoiYXV0aCI7YToxOntzOjIxOiJwYXNzd29yZF9jb25maXJtZWRfYXQiO2k6MTczMjcxMTA2NDt9fQ==', 1732720714),
+('y8FyqEQ3fLGXV7VgncSIy3Ag7hFq30g5Tp65QuHb', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiVVdvekRSMWZCTWlyeGtuamJDa1BwVTlmcVFrOGVkOXBKUmx0Vmc0NCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zaG9wL3lpc29uLWN4NjIwLWluLWVhci13aXJlZC1lYXJwaG9uZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzMyNzEzMjg2O31zOjQ6ImNhcnQiO2E6MDp7fXM6ODoib3JkZXJfaWQiO2k6MjM7fQ==', 1732721303);
 
 -- --------------------------------------------------------
 
@@ -551,8 +563,9 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `user_id`, `order_id`, `mode`, `trans_id`, `status`, `created_at`, `updated_at`) VALUES
-(13, 3, 18, 'online', '6743f498e1690', 'pending', '2024-11-24 21:52:56', '2024-11-24 21:52:56'),
-(14, 3, 19, 'online', '6743f6d6c34c4', 'approved', '2024-11-24 22:02:30', '2024-11-24 22:02:30');
+(16, 3, 21, 'cod', '6745eb804e772', 'approved', '2024-11-26 09:38:40', '2024-11-26 09:40:55'),
+(17, 3, 22, 'online', '6745ec56191f5', 'approved', '2024-11-26 09:42:14', '2024-11-26 09:42:14'),
+(18, 3, 23, 'cod', '67472a217c9fd', 'pending', '2024-11-27 08:18:09', '2024-11-27 08:18:09');
 
 -- --------------------------------------------------------
 
@@ -580,7 +593,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `mobile`, `email_verified_at`, `password`, `utype`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Rahed Hossen', 'rahedhossen49@gmail.com', '01975539231', NULL, '$2y$12$a8AmAa91gnWZ2gX3YgeU2uiKpTETIKtOHt7nPNYETAtxJYK6FtI92', 'ADM', NULL, '2024-11-18 09:34:04', '2024-11-18 09:34:04'),
 (3, 'Rahed hossen', 'rahedhossen75@gmail.com', '01917558212', NULL, '$2y$12$39YVu23QPMOkIyHrrGFPfeY2NXesPfirSxnvYlYUZBVXp9jC.R6WG', 'USR', NULL, '2024-11-21 07:55:42', '2024-11-21 07:56:00'),
-(4, 'Sazzad', 'sazzad@gmail.com', '01234567891', NULL, '$2y$12$3fT.f6KWf5NOCUPmWOwBFulZsXpeGopuxJ7KqciQJipq4i2ql9kge', 'USR', NULL, '2024-11-24 11:29:04', '2024-11-24 11:29:04');
+(4, 'Sazzad', 'sazzad@gmail.com', '01234567891', NULL, '$2y$12$3fT.f6KWf5NOCUPmWOwBFulZsXpeGopuxJ7KqciQJipq4i2ql9kge', 'USR', NULL, '2024-11-24 11:29:04', '2024-11-24 11:29:04'),
+(5, 'Sazzad Hossen', 'sazzadhossen@gmail.com', '01837485935', NULL, '$2y$12$p.M8DepgvqatT6gUcCYYgOEgYLv9Qo.tsIlnINrh.SJ7eZ31RmIR.', 'USR', NULL, '2024-11-27 08:22:38', '2024-11-27 08:22:38');
 
 --
 -- Indexes for dumped tables
@@ -740,7 +754,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -764,7 +778,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -794,25 +808,25 @@ ALTER TABLE `month_names`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `slides`
@@ -824,13 +838,13 @@ ALTER TABLE `slides`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

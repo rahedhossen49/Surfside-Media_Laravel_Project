@@ -9,10 +9,10 @@
             </div>
 
             <div class="about-us__content pb-5 mb-5">
-                <p class="mb-5">
-                    <img loading="lazy" class="w-100 h-auto d-block" src="assets/images/about/about1.jpg" width="1410"
-                        height="550" alt="" />
-                </p>
+                <div class="d-flex justify-content-center mb-5">
+                    <img loading="lazy" class="d-block" src="assets/images/about/about1.jpg" width="950" height="550"
+                        alt="" />
+                </div>
                 <div class="mw-930">
                     <h3 class="mb-4">OUR STORY</h3>
                     <p class="fs-6 fw-medium mb-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum

@@ -163,13 +163,19 @@
                             @endfor
                         </div>
 
-                        <span class="reviews-note text-lowercase text-secondary ms-1">
-                            {{ number_format($product->averageRating, 1) }} / 5
-                        </span>
+                        @if ($product->averageRating > 0)
+                            <span class="reviews-note text-lowercase text-secondary ms-1">
+                                {{ number_format($product->averageRating, 1) }} / 5
+                            </span>
 
-                        <span class="reviews-count ms-2">
-                            ({{ count($reviews) }} reviews)
-                        </span>
+                            <span class="reviews-count ms-2">
+                                ({{ count($reviews) }} reviews)
+                            </span>
+                        @else
+                            <span class="reviews-note text-lowercase text-secondary ms-1"></span>
+                            No reviews yet
+                            </span>
+                        @endif
                     </div>
 
                     <div class="product-single__price">

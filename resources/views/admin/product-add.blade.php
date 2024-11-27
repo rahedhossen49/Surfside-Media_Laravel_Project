@@ -162,7 +162,7 @@
                         </div>
                     </fieldset>
 
-
+                    {{--
                     <div class="cols gap22">
                         <fieldset class="name">
                             <div class="body-title mb-10">Regular Price <span class="tf-color-1">*</span></div>
@@ -173,6 +173,28 @@
                             <div class="body-title mb-10">Sale Price <span class="tf-color-1">*</span></div>
                             <input class="mb-10" type="text" placeholder="Enter sale price" name="sale_price"
                                 tabindex="0" value="{{ old('sale_price') }}" aria-required="true" required="">
+                        </fieldset>
+                    </div> --}}
+
+                    <div class="cols gap22">
+                        <fieldset class="name">
+                            <div class="body-title mb-10">Regular Price <span class="tf-color-1">*</span></div>
+                            <input class="mb-10" type="text" id="regular_price" placeholder="Enter regular price"
+                                name="regular_price" tabindex="0" value="{{ old('regular_price') }}"
+                                aria-required="true" required="">
+                        </fieldset>
+                        <fieldset class="name">
+                            <div class="body-title mb-10">Discount Percent <span class="tf-color-1">*</span></div>
+                            <input class="mb-10" type="number" id="discount_percent"
+                                placeholder="Enter discount percent" name="discount_percent" tabindex="0"
+                                aria-required="true" required="" min="1" max="100"
+                                onBlur="
+                                document.getElementById('sale_price').value = document.getElementById('regular_price').value * (1 - this.value / 100);">
+                        </fieldset>
+                        <fieldset class="name">
+                            <div class="body-title mb-10">Sale Price <span class="tf-color-1">*</span></div>
+                            <input class="mb-10" type="text" id="sale_price" name="sale_price" tabindex="0"
+                                value="{{ old('sale_price') }}" aria-required="true" required="" readonly>
                         </fieldset>
                     </div>
 

@@ -43,8 +43,7 @@
                 <div class="section-menu-left">
                     <div class="box-logo">
                         <a href="{{ route('home.index') }}" id="site-logo-inner">
-                            <img class="w-50 h-50" id="logo_header" alt=""
-                                src="{{ asset('assets/images/logo/logo.png') }}"
+                            <img class="w-25 h-25" alt="logo" src="{{ asset('assets/images/logo/logo.png') }}"
                                 data-light="{{ asset('assets/images/logo/logo.png') }}"
                                 data-dark="{{ asset('assets/images/logo/logo.png') }}">
                         </a>

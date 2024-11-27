@@ -23,10 +23,13 @@ class CartController extends Controller
         return view('cart', compact('items'));
     }
 
+
+
     public function add_to_cart(Request $request)
     {
 
         Cart::instance('cart')->add($request->id, $request->name, $request->quantity, $request->price)->associate('App\Models\Product');
+        $this->calculateDiscount();
         return redirect()->back();
     }
 
@@ -36,7 +39,8 @@ class CartController extends Controller
 
         $product = Cart::instance('cart')->get($rowId);
         $qty = $product->qty + 1;
-        cart::instance('cart')->update($rowId, $qty);
+        Cart::instance('cart')->update($rowId, $qty);
+        $this->calculateDiscount();
         return redirect()->back();
     }
 
@@ -45,6 +49,7 @@ class CartController extends Controller
         $product = Cart::instance('cart')->get($rowId);
         $qty = $product->qty - 1;
         Cart::instance('cart')->update($rowId, $qty);
+        $this->calculateDiscount();
         return redirect()->back();
     }
 
@@ -52,6 +57,7 @@ class CartController extends Controller
     {
 
         Cart::instance('cart')->remove($rowId);
+        $this->calculateDiscount();
         return redirect()->back();
     }
 
@@ -60,6 +66,7 @@ class CartController extends Controller
     {
 
         Cart::instance('cart')->destroy();
+        $this->calculateDiscount();
         return redirect()->back();
     }
 
@@ -67,14 +74,18 @@ class CartController extends Controller
     {
         $coupon_code = $request->coupon_code;
         if (isset($coupon_code)) {
-            // Fetch coupon details
+
+            $subtotalWithoutCommas = str_replace(',', '', Cart::instance('cart')->subtotal());
+
+            $subtotal = floatval($subtotalWithoutCommas);
             $coupon = Coupon::where('code', $coupon_code)
+
                 ->where('expiry_date', '>=', Carbon::today())
-                ->where('cart_value', '<=', Cart::instance('cart')->subtotal())  // Check if cart value is sufficient
+                ->where('cart_value', '<=', $subtotal)
                 ->first();
 
             if (!$coupon) {
-                // Log or return more specific error messages for debugging
+
                 return redirect()->back()->with('error', 'Invalid Coupon Code or Conditions Not Met');
             } else {
                 Session::put('coupon', [
@@ -92,40 +103,40 @@ class CartController extends Controller
         }
     }
 
+
     public function calculateDiscount()
     {
         $discount = 0;
 
         if (Session::has('coupon')) {
-            // Get the coupon data
             $coupon = Session::get('coupon');
 
-            // Validate the coupon value type
             if (!is_numeric($coupon['value'])) {
                 return back()->with('error', 'Invalid coupon value');
             }
 
-            // Get the subtotal and ensure it's numeric
-            $subtotal = floatval(Cart::instance('cart')->subtotal());
+            $subtotalWithoutCommas = str_replace(',', '', Cart::instance('cart')->subtotal());
 
-            // Calculate discount based on coupon type
+            $subtotal = floatval($subtotalWithoutCommas);
+
+            if ($subtotal <= 0) {
+                return back()->with('error', 'Your cart is empty, cannot apply coupon');
+            }
+
             if ($coupon['type'] == 'fixed') {
-                $discount = $coupon['value'];  // Fixed discount
+                $discount = min($coupon['value'], $subtotal);
             } else {
-                // Percentage discount calculation
                 $discount = ($subtotal * $coupon['value']) / 100;
             }
 
-            // Apply discount to the subtotal
             $subtotalAfterDiscount = $subtotal - $discount;
 
-            // Calculate tax after applying the discount
+            $subtotalAfterDiscount = max(0, $subtotalAfterDiscount);
+
             $taxAfterDiscount = ($subtotalAfterDiscount * config('cart.tax')) / 100;
 
-            // Calculate total after applying the discount and tax
             $totalAfterDiscount = $subtotalAfterDiscount + $taxAfterDiscount;
 
-            // Save discount, subtotal, tax, and total values into session with formatted values
             Session::put('discounts', [
                 'discount' => number_format($discount, 2, '.', ''),
                 'subtotal' => number_format($subtotalAfterDiscount, 2, '.', ''),
@@ -134,7 +145,6 @@ class CartController extends Controller
             ]);
         }
     }
-
 
     public function remove_coupon_code()
     {
@@ -157,32 +167,29 @@ class CartController extends Controller
 
     public function place_an_order(Request $request)
     {
+
         $user_id = Auth::user()->id;
-        $address = Address::where('user_id', $user_id)->where('isdefault', true)->first();
+        // $address = Address::where('user_id', $user_id)->where('isdefault', true)->first();
 
-        if (!$address) {
+        $request->validate([
+            'name' => 'required|max:100',
+            'phone' => 'required|numeric|digits:11',
+            'country' => 'required',
+            'state' => 'required',
+            'zip' => 'required|numeric',
+            'address' => 'required',
+        ]);
+        $address = new Address();
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->country = $request->country;
+        $address->state = $request->state;
+        $address->zip = $request->zip;
+        $address->address = $request->address;
+        $address->user_id = $user_id;
+        $address->isdefault = true;
+        $address->save();
 
-            $request->validate([
-                'name' => 'required|max:100',
-                'phone' => 'required|numeric|digits:11',
-                'country' => 'required',
-                'state' => 'required',
-                'zip' => 'required|numeric',
-                'address' => 'required',
-            ]);
-
-
-            $address = new Address();
-            $address->name = $request->name;
-            $address->phone = $request->phone;
-            $address->country = $request->country;
-            $address->state = $request->state;
-            $address->zip = $request->zip;
-            $address->address = $request->address;
-            $address->user_id = $user_id;
-            $address->isdefault = true;
-            $address->save();
-        }
         $this->setAmountforCheckout();
 
         $order = new Order();
