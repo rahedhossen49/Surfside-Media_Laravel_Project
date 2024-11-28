@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
+    <style>
+        .btns {
+
+            border: none !important;
+        }
+    </style>
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
@@ -97,7 +103,7 @@
                                                 style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class=" text-danger delete">
+                                                <button type="button" class="btns text-danger delete">
                                                     <i class="icon-trash-2"></i>
                                                 </button>
                                             </form>

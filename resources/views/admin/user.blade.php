@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
+    <style>
+        .btns {
+
+            border: none !important;
+        }
+    </style>
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
@@ -78,7 +84,7 @@
                                                     style="display: inline;">
                                                     @csrf
                                                     @method('DELETE') <!-- Laravel DELETE method -->
-                                                    <button type="submit" class="item text-danger delete"">
+                                                    <button type="submit" class="btns item text-danger delete"">
                                                         <i class="icon-trash-2"></i>
                                                     </button>
                                                 </form>
