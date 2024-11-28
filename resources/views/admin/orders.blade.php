@@ -97,8 +97,8 @@
                                                 style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-danger btn-sm delete">
-                                                    <i class="icon-trash"></i> Delete
+                                                <button type="button" class=" text-danger delete">
+                                                    <i class="icon-trash-2"></i>
                                                 </button>
                                             </form>
                                         </td>

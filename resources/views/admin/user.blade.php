@@ -78,9 +78,8 @@
                                                     style="display: inline;">
                                                     @csrf
                                                     @method('DELETE') <!-- Laravel DELETE method -->
-                                                    <button type="submit" class="item delete"
-                                                        style="border: none; background: none;">
-                                                        <i class="icon-delete"></i>
+                                                    <button type="submit" class="item text-danger delete"">
+                                                        <i class="icon-trash-2"></i>
                                                     </button>
                                                 </form>
                                             </div>
@@ -103,3 +102,48 @@
         </div>
     </div>
 @endsection
+
+
+<div class="item text-danger delete">
+
+    <i class="icon-trash-2"></i>
+
+</div>
+
+@push('scripts')
+    <script>
+        $(function() {
+
+            $('.delete').on('click', function(e) {
+
+                e.preventDefault();
+
+                var form = $(this).closest('form');
+
+                swal({
+
+                    title: "Are You Sure",
+
+                    text: "You Want to Delete this record?",
+
+                    type: 'warning',
+
+                    buttons: ["No", "Yes"],
+
+                    confirmButtonColor: '#dc3545',
+
+                }).then(function(result) {
+
+                    if (result) {
+
+                        form.submit();
+
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
+@endpush
